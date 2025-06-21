@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>About Me - Dinuka D. Kirindage</title>
+
+  <!-- Google Fonts for nice typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* === BASIC RESET === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0c0c1d;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* === NAVIGATION BAR (Shared across pages) === */
+    nav {
+      background-color: #0d025e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .Navlogo {
+      width: 170px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: #ffd700;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      color: #e00b0b;
+      background-color: #ffffff10;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .download_Resume {
+      font-size: 15px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 2px solid #ffd700;
+      background: transparent;
+      color: #ffd700;
+      cursor: pointer;
+    }
+
+    .download_Resume:hover {
+      background-color: #ffd700;
+      color: black;
+    }
+
+    /* === MAIN ABOUT SECTION === */
+    .about-section {
+      padding: 4rem 2rem;
+      background-color: #121232;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      font-size: 36px;
+      color: #ffd700;
+      margin-bottom: 2rem;
+    }
+
+    /* === PROFILE PHOTO STYLE FOR ABOUT PAGE === */
+.DinukaPhoto {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 6px solid #ffd700;
+  margin: 2rem auto 1rem auto;
+  display: block;
+  transition: 0.3s ease-in-out;
+}
+
+.DinukaPhoto:hover {
+  transform: scale(1.05);
+}
+
+
+    .personal-info p {
+      font-size: 18px;
+      margin: 0.5rem 0;
+    }
+
+    /* === CARDS SECTION === */
+    .about-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .about-card {
+      background-color: #1e1e3f;
+      border: 2px solid #ffd700;
+      padding: 2rem;
+      border-radius: 16px;
+      width: 280px;
+      transition: 0.3s;
+      color: white;
+    }
+
+    .about-card:hover {
+      background-color: #ffd700;
+      color: black;
+      transform: translateY(-10px);
+      cursor: pointer;
+    }
+
+    .about-card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    /* === INDIVIDUAL SECTION DETAILS === */
+    .section-block {
+      padding: 4rem 2rem;
+      background-color: #0c0c1d;
+      text-align: center;
+    }
+
+    .section-block h2 {
+      font-size: 32px;
+      color: #ffd700;
+      margin-bottom: 2rem;
+    }
+
+    .section-block p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cert-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background-color: #ffd700;
+      padding: 12px 24px;
+      color: black;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .project-placeholder {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .placeholder-box {
+      width: 280px;
+      height: 180px;
+      background-color: #1e1e3f;
+      border: 2px dashed #ffd700;
+      border-radius: 12px;
+    }
+
+    /* === MOBILE FRIENDLY === */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .about-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- === NAVIGATION BAR === -->
+  <nav>
+    <img class="Navlogo" src="./Assets/logo.png" alt="Logo">
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
+      <li><a href="#aboutMe"><i class="fas fa-user"></i> ABOUT ME</a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
+      <button class="download_Resume"><i class="fas fa-download"></i> Resume</button>
+    </ul>
+  </nav>
+
+  <!-- === ABOUT ME MAIN SECTION === -->
+  <section id="aboutMe" class="about-section">
+    <h2>About Me</h2>
+    <!-- === Profile Photo Section === -->
+    <img src="./Assets/About Section Photo.jpg" alt="Dinuka" class="DinukaPhoto">
+
+
+    <!-- === Personal Information Section === -->
+    <div class="personal-info">
+      <p><strong>Full Name :</strong> &nbsp&nbspDinuka D. Kirindage</p>
+      <p><strong>Date of Birth :</strong> &nbsp&nbspApril 10, 2003</p>
+      <p><strong>Address :</strong> &nbsp&nbspGalle, Sri Lanka</p>
+      <p><strong>G.C.E O/L Results :</strong> &nbsp&nbsp2A, 2C, 5B</p>
+      <p><strong>G.C.E A/L Results :</strong> &nbsp&nbsp1B, 1C, 1S</p>
+      <p><strong>GPA :</strong> &nbsp&nbsp2.43</p>
+    </div>
+
+    <!-- === Three Cards to Navigate to Each Role Section === -->
+    <div class="about-cards">
+      <a href="#techSection" class="about-card">
+        <h3>Me as a Tech Enthusiast</h3>
+        <p>IT Undergraduate at SLIIT</p>
+      </a>
+      <a href="#politicsSection" class="about-card">
+        <h3>Me as a Political Activist</h3>
+        <p>Active Party Member</p>
+      </a>
+      <a href="#businessSection" class="about-card">
+        <h3>Me as an Entrepreneur</h3>
+        <p>Business Owner & Investor</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- === TECH SECTION === -->
+  <section id="techSection" class="section-block">
+    <h2>Me as a Tech Enthusiast</h2>
+    <p>
+      I studied Information & Communication Technology for my G.C.E Advanced Level examination.
+      Now, I’m currently pursuing my Bachelor’s Degree in IT at SLIIT. I’m also taking online courses 
+      many of which I've completed and earned certificates for. These certifications are already listed on my LinkedIn profile.
+    </p>
+
+    <a href="https://www.linkedin.com/in/dinukadk/details/certifications/" target="_blank" class="cert-btn">
+      View My Certifications
+    </a>
+
+    <br><br><hr style="margin: 3rem auto; width: 80%; border: 1px solid #ffd700;"><br>
+
+    <h3 style="color:#ffd700; font-size: 24px;">Projects Showcase</h3>
+    <p>I'm currently working on some exciting projects. Once completed, I’ll upload them here with images and details.</p>
+
+    <!-- Placeholder Boxes for Future Project Images -->
+    <div class="project-placeholder">
+      <div class="placeholder-box"></div>
+      <div class="placeholder-box"></div>
+    </div>
+  </section>
+
+  <!-- === POLITICAL JOURNEY SECTION === -->
+<section id="politicsSection" class="about-section">
+
+  <!-- Section Title -->
+  <h2>Me as a Political Enthusiast</h2>
+
+  <!-- Intro Paragraph -->
+<p style="max-width: 800px; margin: 1.5rem auto; font-size: 18px; line-height: 1.8;">
+  I have been interested in politics since my school days and am a dedicated young man who aspires for a better social system.
+  I started party politics systematically with Mr. Dilith Jayaweera in his then Mawbima Janatha Party. In a short time,
+  I was elected as a Youth Executive Committee member. While actively carrying out political activities in that party,
+  I also met and discussed with mature politicians with both similar and contrasting ideologies, always seeking wisdom
+  and advice from them. Below are some of the memorable moments captured with these political leaders.
+</p>
+
+
+  <!-- === PHOTO GALLERY WRAPPER === -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
+
+    <!-- === POLITICIAN CARD 1 === -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Dilith-Politics.jpg" alt="Dilith Jayaweera" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Dilith Susantha Jayaweera</h3>
+      <p style="font-size: 15px;">
+        Founder of Mawbima Janatha Party. Presidential candidate in 2024. Current MP via National List. Media mogul, lawyer & political leader.
+      </p>
+    </div>
+
+    <!-- === POLITICIAN CARD 2 === -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Manusha.jpeg" alt="Manusha Nanayakkara" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Manusha Nanayakkara</h3>
+      <p style="font-size: 15px;">
+        Minister of Labour & Foreign Employment (2022). Currently serving as Advisor to the President on Labour & Employment affairs.
+      </p>
+    </div>
+
+    <!-- === POLITICIAN CARD 3 === -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Udaya.jpg" alt="Udaya Gammanpila" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Udaya Prabath Gammanpila</h3>
+      <p style="font-size: 15px;">
+        Leader of Pivithuru Hela Urumaya. Former Minister of Energy, Parliamentarian for Colombo District, and advocate of nationalist values.
+      </p>
+    </div>
+
+    <!-- === POLITICIAN CARD 4 === -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Channa.jpg" alt="Channa Jayasumana" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Channa Jayasumana</h3>
+      <p style="font-size: 15px;">
+        Former State Minister of Pharmaceuticals & Cabinet Minister of Health during Sri Lanka's reform period post-2022.
+      </p>
+    </div>
+
+    <!-- === POLITICIAN CARD 5 === -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Wimal.jpg" alt="Wimal Weerawansa" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Wimal Weerawansa</h3>
+      <p style="font-size: 15px;">
+        Leader of the National Freedom Front (NFF). Held cabinet roles in industries, construction, housing, and SME development.
+      </p>
+    </div>
+
+    <!-- === POLITICIAN CARD 6 === -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/SeelarathanaThero.jpeg" alt="Seelarathana Thero" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Baththaramulle Seelarathana Thero</h3>
+      <p style="font-size: 15px;">
+        Leader of Janasetha Peramuna. Presidential candidate in 2020 & 2024, advocating for "One Country, One Nation, One Law".
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+  <!-- === ENTREPRENEUR SECTION === -->
+<section id="businessSection" class="about-section">
+
+  <!-- Section Heading -->
+  <h2>Me as an Entrepreneur</h2>
+
+  <!-- Intro Paragraph -->
+  <p style="max-width: 800px; margin: 1.5rem auto; font-size: 18px; line-height: 1.8;">
+    Currently, I manage my father’s book shop, while also building a brand called <strong>"CapitalD"</strong>. 
+    My goal is to expand this into a full-scale business group in the near future something like <strong>CapitalD Business Group</strong>  
+    spanning tech, media, innovation, and education. I’m already shaping up several business ideas and plan to execute them once I complete my IT degree.
+  </p>
+
+  <!-- === BUSINESS PHOTO SHOWCASE === -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
+
+    <!-- 1. Father's Bookshop -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/DinukaBookShop.jpg" alt="Dinuka Book Shop" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Dinuka Book Shop</h3>
+      <p style="font-size: 15px;">
+        My father's legacy a trusted local bookshop that I currently manage. It taught me business ethics and customer service from the ground up.
+      </p>
+    </div>
+
+    <!-- 2. Dilith Jayaweera (as Business Tycoon) -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Dilith-Business.jpg" alt="Dilith Jayaweera" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Dilith Jayaweera</h3>
+      <p style="font-size: 15px;">
+        A diversified business giant who owns or controls 40+ companies across media, finance, hospitality, and more. A personal inspiration in both politics and enterprise.
+      </p>
+    </div>
+
+    <!-- 3. Dhanushka Fernando (Finez) -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Dhanushka.jpg" alt="Dhanushka Fernando" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Dhanushka Fernando</h3>
+      <p style="font-size: 15px;">
+        Award-winning entrepreneur behind Finez a premium interior & furniture brand focused on innovation, sustainability, and local craftsmanship.
+      </p>
+    </div>
+
+    <!-- 4. Dhanika Perera (Helakuru) -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Dhanika.jpeg" alt="Dhanika Perera" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Dhanika Perera</h3>
+      <p style="font-size: 15px;">
+        Founder of Bhasha Lanka and creator of Helakuru. A key figure in tech entrepreneurship and digital localization in Sri Lanka.
+      </p>
+    </div>
+
+    <!-- 5. Dilshan Abeygunawardana (Olee AI) -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Dilshan.jpeg" alt="Dilshan Abeygunawardana" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Dilshan Abeygunawardana</h3>
+      <p style="font-size: 15px;">
+        Co-founder of Olee AI and global top NFT freelancer. His journey inspires my vision to combine tech, business, and creativity.
+      </p>
+    </div>
+
+    <!-- 6. Dulith Herath (Kapruka) -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Dulith.jpeg" alt="Dulith Herath" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Dulith Herath</h3>
+      <p style="font-size: 15px;">
+        Serial entrepreneur behind Kapruka.com and Java Lounge. A symbol of innovation in Sri Lanka’s e-commerce and logistics sectors.
+      </p>
+    </div>
+
+    <!-- 7. Chandana Sooriyabandara (Media Entrepreneur) -->
+    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
+      <img src="./Assets/Mr.Chandana.jpeg" alt="Chandana Sooriyabandara" style="width: 100%; border-radius: 12px;">
+      <h3 style="margin-top: 1rem; color: #ffd700;">Chandana Sooriyabandara</h3>
+      <p style="font-size: 15px;">
+        Veteran media executive and current Presidential Media Advisor. His entrepreneurial mindset reshaped Sri Lankan journalism and media ethics.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+</body>
+
+</html>
