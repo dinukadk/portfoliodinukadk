@@ -2,12 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dinuka D. Kirindage</title>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <style>
@@ -25,9 +22,10 @@
 
     a {
       text-decoration: none;
+      color: inherit;
     }
 
-    /* === NAVIGATION BAR === */
+    /* === NAVIGATION === */
     nav {
       background-color: #0d025e;
       display: flex;
@@ -35,29 +33,29 @@
       align-items: center;
       padding: 1rem 2rem;
       position: relative;
+      z-index: 1000;
     }
 
     .Navlogo {
       width: 170px;
     }
 
-    nav ul {
-      list-style: none;
+    .nav-links {
       display: flex;
-      align-items: center;
-      gap: 2rem;
+      list-style: none;
+      gap: 1.5rem;
     }
 
-    nav ul li a {
+    .nav-links li a {
       color: #ffd700;
       font-weight: bold;
+      padding: 8px 12px;
       transition: 0.3s;
     }
 
-    nav ul li a:hover {
+    .nav-links li a:hover {
       color: #e00b0b;
       background-color: #ffffff10;
-      padding: 8px 12px;
       border-radius: 8px;
     }
 
@@ -81,41 +79,36 @@
       font-size: 28px;
       color: #ffd700;
       cursor: pointer;
-      z-index: 1001;
     }
 
-    /* === Responsive NAV === */
     @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-
-      nav ul {
+      .nav-links {
         display: none;
         flex-direction: column;
-        align-items: flex-start;
+        background-color: #0d025e;
         position: absolute;
         top: 70px;
         left: 0;
-        background-color: #0d025e;
         width: 100%;
-        padding: 1rem 2rem;
-        z-index: 1000;
+        padding: 1rem;
       }
 
-      nav ul.show {
+      .nav-links.show {
         display: flex;
+      }
+
+      .hamburger {
+        display: block;
       }
     }
 
-    /* === LOGOS === */
+    /* === LOGO SECTION === */
     .capitalDlogo {
       position: absolute;
       top: 5px;
       right: 20px;
       width: 130px;
       transition: 0.3s;
-      z-index: 2;
     }
 
     .dinukaLogo {
@@ -124,7 +117,6 @@
       left: 20px;
       width: 85px;
       transition: 0.3s;
-      z-index: 2;
     }
 
     .capitalDlogo:hover,
@@ -132,10 +124,20 @@
       transform: scale(1.3);
     }
 
+    @media (max-width: 768px) {
+      .capitalDlogo, .dinukaLogo {
+        width: 65px;
+      }
+
+      .capitalDlogo {
+        top: 10px;
+      }
+    }
+
+    /* === HOME SECTION === */
     .Details {
-      padding: 4rem 2rem 2rem 2rem;
+      padding: 4rem 2rem;
       text-align: center;
-      background: #0c0c1d;
       position: relative;
       min-height: 100vh;
     }
@@ -144,11 +146,6 @@
       font-size: 40px;
       margin: 0.5rem 0;
       font-weight: 600;
-      transition: 0.3s ease;
-    }
-
-    .DetailsH:hover {
-      color: #adf30b;
     }
 
     .DinukaPhoto {
@@ -157,8 +154,8 @@
       border-radius: 50%;
       border: 6px solid #ffd700;
       margin: 2rem auto;
-      transition: 0.3s ease-in-out;
       object-fit: cover;
+      transition: 0.3s ease-in-out;
     }
 
     .DinukaPhoto:hover {
@@ -175,7 +172,6 @@
       font-size: 17px;
       line-height: 1.6;
       color: #dcdcdc;
-      padding: 0 1rem;
     }
 
     .caption {
@@ -186,13 +182,13 @@
     }
 
     @media (max-width: 768px) {
+      .DetailsH {
+        font-size: 28px;
+      }
+
       .DinukaPhoto {
         width: 200px;
         height: 200px;
-      }
-
-      .DetailsH {
-        font-size: 28px;
       }
 
       .name-section h1 {
@@ -201,12 +197,6 @@
 
       .caption {
         font-size: 16px;
-      }
-
-      .capitalDlogo,
-      .dinukaLogo {
-        width: 50px;
-        top: 15px;
       }
     }
   </style>
@@ -217,15 +207,18 @@
   <!-- === NAVIGATION BAR === -->
   <nav>
     <img class="Navlogo" src="./Assets/logo.png" alt="Logo">
-    <div class="hamburger" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-    <ul id="nav-links">
+
+    <ul class="nav-links" id="nav-links">
       <li><a href="#"><i class="fas fa-home"></i> HOME</a></li>
       <li><a href="aboutme.html"><i class="fas fa-user"></i> ABOUT ME</a></li>
       <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
-      <button class="download_Resume"><i class="fas fa-download"></i> Resume</button>
+      <li><button class="download_Resume"><i class="fas fa-download"></i> Resume</button></li>
     </ul>
+
+    <!-- Hamburger Icon -->
+    <div class="hamburger" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
   </nav>
 
   <!-- === HOME SECTION === -->
@@ -255,7 +248,7 @@
     <p class="caption">“Passionate about CODING and Debugging the UNIVERSE.”</p>
   </section>
 
-  <!-- === JS === -->
+  <!-- === JS for Toggle === -->
   <script>
     function toggleMenu() {
       const navLinks = document.getElementById("nav-links");
