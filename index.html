@@ -106,11 +106,6 @@
       nav ul.show {
         display: flex;
       }
-
-      nav {
-        flex-direction: row;
-        justify-content: space-between;
-      }
     }
 
     /* === LOGOS === */
@@ -259,8 +254,13 @@
     <p class="caption">“Passionate about CODING and Debugging the UNIVERSE.”</p>
   </section>
 
-  <!-- === SCRIPT === -->
-  <script src="js/main.js"></script>
+  <!-- === INLINE SCRIPT FOR TOGGLING NAV === -->
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('show');
+    }
+  </script>
 </body>
 
 </html>
