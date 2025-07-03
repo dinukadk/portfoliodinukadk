@@ -49,6 +49,26 @@ nav ul {
   gap: 2rem;
 }
 
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #0d025e;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    z-index: 999;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+}
+
+
 nav ul li a {
   color: #ffd700;
   font-weight: bold;
@@ -77,6 +97,21 @@ nav ul li a:hover {
   color: black;
 }
 
+/* === Hamburger Icon === */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  color: #ffd700;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+}
+    
+    
 /* === LOGOS === */
 .capitalDlogo {
   position: absolute;
