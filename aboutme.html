@@ -1,24 +1,36 @@
-<!-- ✅ FULLY FIXED contact.html AND aboutme.html (Hamburger Menu Responsive) ✅ -->
-<!-- I will now paste the full modified and working versions below. Just copy-paste each file into your project as is. -->
-
-<!-- === ✅ CONTACT.HTML FIXED ✅ === -->
-<!-- Save as contact.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | Dinuka D. Kirindage</title>
+  <title>About Me - Dinuka D. Kirindage</title>
 
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; background-color: #0c0c1d; color: #fff; line-height: 1.6; }
-    a { text-decoration: none; color: inherit; }
+    /* === RESET === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0c0c1d;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* === NAVIGATION BAR === */
     nav {
       background-color: #0d025e;
       display: flex;
@@ -26,26 +38,29 @@
       align-items: center;
       padding: 1rem 2rem;
       position: relative;
+      z-index: 1000;
     }
 
-    .Navlogo { width: 170px; }
+    .Navlogo {
+      width: 170px;
+    }
 
-    .nav-links {
+    nav ul {
       list-style: none;
       display: flex;
       align-items: center;
       gap: 2rem;
     }
 
-    .nav-links li a {
+    nav ul li a {
       color: #ffd700;
       font-weight: bold;
-      padding: 8px 12px;
     }
 
-    .nav-links li a:hover {
+    nav ul li a:hover {
       color: #e00b0b;
       background-color: #ffffff10;
+      padding: 8px 12px;
       border-radius: 8px;
     }
 
@@ -59,7 +74,10 @@
       cursor: pointer;
     }
 
-    .download_Resume:hover { background-color: #ffd700; color: black; }
+    .download_Resume:hover {
+      background-color: #ffd700;
+      color: black;
+    }
 
     .hamburger {
       display: none;
@@ -69,7 +87,8 @@
     }
 
     @media (max-width: 768px) {
-      .nav-links {
+      nav ul {
+        display: none;
         flex-direction: column;
         background-color: #0d025e;
         position: absolute;
@@ -77,107 +96,184 @@
         left: 0;
         width: 100%;
         padding: 1rem;
-        display: none;
       }
 
-      .nav-links.show { display: flex; }
-      .hamburger { display: block; }
+      nav ul.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
     }
 
-    header { text-align: center; padding: 3rem 1rem 1rem; }
-    header h1 { font-size: 36px; color: #ffd700; margin-bottom: 0.5rem; }
-    header p { font-size: 18px; color: #dcdcdc; }
-
-    .card-section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 2rem;
-      gap: 2rem;
+    /* === ABOUT PAGE MAIN SECTION === */
+    .about-section {
+      padding: 4rem 2rem;
+      background-color: #121232;
+      text-align: center;
     }
 
-    .card-section img {
-      width: 420px;
-      max-width: 90%;
-      border: 3px solid #ffd700;
-      border-radius: 12px;
-    }
-
-    .social-section { padding: 3rem 2rem; text-align: center; }
-    .social-section h2 { font-size: 28px; margin-bottom: 1.5rem; color: #ffd700; }
-
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    .social-icons a {
-      font-size: 20px;
-      padding: 0.8rem 1rem;
-      background-color: #1e1e3f;
-      border-radius: 10px;
-      border: 2px solid #ffd700;
+    .about-section h2 {
+      font-size: 36px;
       color: #ffd700;
+      margin-bottom: 2rem;
+    }
+
+    .DinukaPhoto {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 6px solid #ffd700;
+      margin: 2rem auto 1rem auto;
+      display: block;
+      transition: 0.3s ease-in-out;
+    }
+
+    .DinukaPhoto:hover {
+      transform: scale(1.05);
+    }
+
+    .personal-info p {
+      font-size: 18px;
+      margin: 0.5rem 0;
+    }
+
+    .about-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .about-card {
+      background-color: #1e1e3f;
+      border: 2px solid #ffd700;
+      padding: 2rem;
+      border-radius: 16px;
+      width: 280px;
       transition: 0.3s;
     }
 
-    .social-icons a:hover { background-color: #ffd700; color: black; }
+    .about-card:hover {
+      background-color: #ffd700;
+      color: black;
+      transform: translateY(-10px);
+      cursor: pointer;
+    }
 
-    .numbers { margin-top: 3rem; }
-    .numbers h3 { font-size: 22px; color: #ffd700; margin-bottom: 0.8rem; }
-    .numbers p { font-size: 18px; color: #dcdcdc; }
+    .about-card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .section-block {
+      padding: 4rem 2rem;
+      background-color: #0c0c1d;
+      text-align: center;
+    }
+
+    .section-block h2 {
+      font-size: 32px;
+      color: #ffd700;
+      margin-bottom: 2rem;
+    }
+
+    .section-block p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cert-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background-color: #ffd700;
+      padding: 12px 24px;
+      color: black;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .project-placeholder {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .placeholder-box {
+      width: 280px;
+      height: 180px;
+      background-color: #1e1e3f;
+      border: 2px dashed #ffd700;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .about-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- === NAVBAR === -->
   <nav>
     <img class="Navlogo" src="./Assets/logo.png" alt="Logo">
-    <ul class="nav-links" id="nav-links">
+    <ul id="nav-links">
       <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
-      <li><a href="aboutme.html"><i class="fas fa-user"></i> ABOUT ME</a></li>
+      <li><a href="#aboutMe"><i class="fas fa-user"></i> ABOUT ME</a></li>
       <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
-      <li><button class="download_Resume"><i class="fas fa-download"></i> Resume</button></li>
+      <button class="download_Resume"><i class="fas fa-download"></i> Resume</button>
     </ul>
     <div class="hamburger" onclick="toggleMenu()">
       <i class="fas fa-bars"></i>
     </div>
   </nav>
 
-  <header>
-    <h1>Contact Me</h1>
-    <p>Let’s build something amazing together. Reach out through any of the channels below.</p>
-  </header>
-
-  <div class="card-section">
-    <img src="./Assets/business_Card_Front.png" alt="Business Card Front">
-    <img src="./Assets/business_Card_Back.png" alt="Business Card Back">
-  </div>
-
-  <div class="social-section">
-    <h2>Follow Me on Social Media</h2>
-    <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-      <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      <!-- Add more icons as needed -->
+  <!-- === MAIN ABOUT ME SECTION === -->
+  <section id="aboutMe" class="about-section">
+    <h2>About Me</h2>
+    <img src="./Assets/About Section Photo.jpg" alt="Dinuka" class="DinukaPhoto">
+    <div class="personal-info">
+      <p><strong>Full Name:</strong> Dinuka D. Kirindage</p>
+      <p><strong>Date of Birth:</strong> April 10, 2003</p>
+      <p><strong>Address:</strong> Galle, Sri Lanka</p>
+      <p><strong>G.C.E O/L:</strong> 2A, 2C, 5B</p>
+      <p><strong>G.C.E A/L:</strong> 1B, 1C, 1S</p>
     </div>
 
-    <div class="numbers">
-      <h3>💬 WhatsApp</h3>
-      <p>074 232 5758</p><br>
-      <h3>📞 Call / SMS</h3>
-      <p>074 232 5758 <br> 075 232 5758 <br> 071 323 5758</p>
+    <div class="about-cards">
+      <a href="#techSection" class="about-card">
+        <h3>Me as a Tech Enthusiast</h3>
+        <p>IT Undergraduate at SLIIT</p>
+      </a>
+      <a href="#politicsSection" class="about-card">
+        <h3>Me as a Political Activist</h3>
+        <p>Active Party Member</p>
+      </a>
+      <a href="#businessSection" class="about-card">
+        <h3>Me as an Entrepreneur</h3>
+        <p>Business Owner & Investor</p>
+      </a>
     </div>
-  </div>
+  </section>
 
+  <!-- === REMAINING SECTIONS: TECH, POLITICS, BUSINESS === -->
+  <!-- Your existing full content for: #techSection, #politicsSection, #businessSection goes here without change -->
+
+  <!-- === TOGGLE SCRIPT === -->
   <script>
     function toggleMenu() {
-      document.getElementById("nav-links").classList.toggle("show");
+      const navLinks = document.getElementById("nav-links");
+      navLinks.classList.toggle("show");
     }
   </script>
+
 </body>
 </html>
