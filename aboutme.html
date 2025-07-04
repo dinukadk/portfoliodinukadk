@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,29 +7,18 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome (Correct version) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* === RESET === */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
       background-color: #0c0c1d;
       color: #fff;
     }
+    a { text-decoration: none; color: inherit; }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* === NAVIGATION BAR === */
     nav {
       background-color: #0d025e;
       display: flex;
@@ -41,23 +29,21 @@
       z-index: 1000;
     }
 
-    .Navlogo {
-      width: 170px;
-    }
+    .Navlogo { width: 170px; }
 
-    nav ul {
+    .nav-links {
       list-style: none;
       display: flex;
       align-items: center;
       gap: 2rem;
     }
 
-    nav ul li a {
+    .nav-links li a {
       color: #ffd700;
       font-weight: bold;
     }
 
-    nav ul li a:hover {
+    .nav-links li a:hover {
       color: #e00b0b;
       background-color: #ffffff10;
       padding: 8px 12px;
@@ -87,7 +73,7 @@
     }
 
     @media (max-width: 768px) {
-      nav ul {
+      .nav-links {
         display: none;
         flex-direction: column;
         background-color: #0d025e;
@@ -97,17 +83,10 @@
         width: 100%;
         padding: 1rem;
       }
-
-      nav ul.show {
-        display: flex;
-      }
-
-      .hamburger {
-        display: block;
-      }
+      .nav-links.active { display: flex; }
+      .hamburger { display: block; }
     }
 
-    /* === ABOUT PAGE MAIN SECTION === */
     .about-section {
       padding: 4rem 2rem;
       background-color: #121232;
@@ -163,53 +142,7 @@
       cursor: pointer;
     }
 
-    .about-card h3 {
-      margin-bottom: 0.5rem;
-    }
-
-    .section-block {
-      padding: 4rem 2rem;
-      background-color: #0c0c1d;
-      text-align: center;
-    }
-
-    .section-block h2 {
-      font-size: 32px;
-      color: #ffd700;
-      margin-bottom: 2rem;
-    }
-
-    .section-block p {
-      font-size: 18px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .cert-btn {
-      display: inline-block;
-      margin-top: 1.5rem;
-      background-color: #ffd700;
-      padding: 12px 24px;
-      color: black;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    .project-placeholder {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    .placeholder-box {
-      width: 280px;
-      height: 180px;
-      background-color: #1e1e3f;
-      border: 2px dashed #ffd700;
-      border-radius: 12px;
-    }
+    .about-card h3 { margin-bottom: 0.5rem; }
 
     @media (max-width: 768px) {
       .about-cards {
@@ -221,23 +154,20 @@
 </head>
 
 <body>
-
-  <!-- === NAVBAR === -->
+  <!-- === NAVIGATION BAR === -->
   <nav>
     <img class="Navlogo" src="./Assets/logo.png" alt="Logo">
-    <ul id="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
-      <li><a href="#aboutMe"><i class="fas fa-user"></i> ABOUT ME</a></li>
+      <li><a href="aboutme.html"><i class="fas fa-user"></i> ABOUT ME</a></li>
       <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
-      <button class="download_Resume"><i class="fas fa-download"></i> Resume</button>
+      <li><button class="download_Resume"><i class="fas fa-download"></i> Resume</button></li>
     </ul>
-    <div class="hamburger" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
+    <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
   </nav>
 
-  <!-- === MAIN ABOUT ME SECTION === -->
-  <section id="aboutMe" class="about-section">
+  <!-- === ABOUT ME SECTION === -->
+  <section class="about-section" id="aboutMe">
     <h2>About Me</h2>
     <img src="./Assets/About Section Photo.jpg" alt="Dinuka" class="DinukaPhoto">
     <div class="personal-info">
@@ -264,16 +194,11 @@
     </div>
   </section>
 
-  <!-- === REMAINING SECTIONS: TECH, POLITICS, BUSINESS === -->
-  <!-- Your existing full content for: #techSection, #politicsSection, #businessSection goes here without change -->
-
-  <!-- === TOGGLE SCRIPT === -->
   <script>
     function toggleMenu() {
       const navLinks = document.getElementById("nav-links");
-      navLinks.classList.toggle("show");
+      navLinks.classList.toggle("active");
     }
   </script>
-
 </body>
 </html>
