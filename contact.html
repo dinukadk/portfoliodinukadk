@@ -1,9 +1,10 @@
+<!-- FULL contact.html WITH HAMBURGER MENU -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | Dinuka D. Kirindage</title>
 
   <!-- Google Fonts -->
@@ -36,6 +37,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
+      position: relative;
+      z-index: 1000;
     }
 
     .Navlogo {
@@ -52,6 +55,7 @@
     nav ul li a {
       color: #ffd700;
       font-weight: bold;
+      transition: 0.3s;
     }
 
     nav ul li a:hover {
@@ -74,6 +78,34 @@
     .download_Resume:hover {
       background-color: #ffd700;
       color: black;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      color: #ffd700;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #0d025e;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
     }
 
     header {
@@ -159,17 +191,6 @@
     }
 
     @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav ul {
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
       .card-section {
         flex-direction: column;
       }
@@ -187,12 +208,17 @@
   <!-- === NAVIGATION BAR === -->
   <nav>
     <img class="Navlogo" src="./Assets/logo.png" alt="Logo">
-    <ul>
+
+    <ul id="nav-links">
       <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
       <li><a href="aboutme.html"><i class="fas fa-user"></i> ABOUT ME</a></li>
       <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
       <button class="download_Resume"><i class="fas fa-download"></i> Resume</button>
     </ul>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
   </nav>
 
   <!-- === PAGE HEADER === -->
@@ -228,13 +254,18 @@
       <h3>💬 WhatsApp</h3>
       <p>074 232 5758</p>
       <br>
-
       <h3>📞 Call / SMS</h3>
       <p>074 232 5758 <br> 075 232 5758 <br> 071 323 5758</p>
-      
     </div>
   </div>
 
-</body>
+  <!-- === JS for Toggle === -->
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("nav-links");
+      navLinks.classList.toggle("show");
+    }
+  </script>
 
+</body>
 </html>
