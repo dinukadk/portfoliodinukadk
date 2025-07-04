@@ -110,3 +110,40 @@ nav ul li a:hover {
     background-color: #e00b0b;
     padding: 10px;
   }
+/* Hamburger default hidden on desktop */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Mobile nav styles */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: #000; /* adjust as needed */
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 999;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+}
