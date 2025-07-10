@@ -6,106 +6,9 @@
   <title>Dinuka D. Kirindage</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #0c0c1d;
-      color: #fff;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* === NAVIGATION === */
-    nav {
-      background-color: #0d025e;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: relative;
-      z-index: 1000;
-    }
-
-    .Navlogo {
-      width: 170px;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-    }
-
-    .nav-links li a {
-      color: #ffd700;
-      font-weight: bold;
-      padding: 8px 12px;
-      transition: 0.3s;
-    }
-
-    .nav-links li a:hover {
-      color: #e00b0b;
-      background-color: #ffffff10;
-      border-radius: 8px;
-    }
-
-    .download_Resume {
-      font-size: 15px;
-      padding: 8px 16px;
-      border-radius: 20px;
-      border: 2px solid #ffd700;
-      background: transparent;
-      color: #ffd700;
-      cursor: pointer;
-    }
-
-    .download_Resume:hover {
-      background-color: #ffd700;
-      color: black;
-    }
-
-    .hamburger {
-      display: none;
-      font-size: 28px;
-      color: #ffd700;
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: #0d025e;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        padding: 1rem;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      .nav-links li {
-        margin: 10px 0;
-      }
-    }
-
     /* === LOGO SECTION === */
     .capitalDlogo {
       position: absolute;
@@ -144,6 +47,7 @@
       text-align: center;
       position: relative;
       min-height: 100vh;
+      background-color: #0c0c1d;
     }
 
     .DetailsH {
@@ -151,6 +55,11 @@
       margin: 0.5rem 0;
       font-weight: 600;
     }
+
+    
+.DetailsH:hover{
+    color: #adf30b;
+}
 
     .DinukaPhoto {
       width: 280px;
@@ -210,7 +119,7 @@
 
   <!-- === NAVIGATION BAR === -->
   <nav>
-    <img class="Navlogo" src="./Assets/logo.png" alt="Logo">
+    <a href="#"><img class="Navlogo" src="./Assets/logo.png" alt="Logo"></a>
 
     <ul class="nav-links" id="nav-links">
       <li><a href="#"><i class="fas fa-home"></i> HOME</a></li>
