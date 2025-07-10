@@ -9,83 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
   <!-- Font Awesome (Correct version) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #0c0c1d;
-      color: #fff;
-    }
-    a { text-decoration: none; color: inherit; }
-
-    nav {
-      background-color: #0d025e;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: relative;
-      z-index: 1000;
-    }
-
-    .Navlogo { width: 170px; }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-links li a {
-      color: #ffd700;
-      font-weight: bold;
-    }
-
-    .nav-links li a:hover {
-      color: #e00b0b;
-      background-color: #ffffff10;
-      padding: 8px 12px;
-      border-radius: 8px;
-    }
-
-    .download_Resume {
-      font-size: 15px;
-      padding: 8px 16px;
-      border-radius: 20px;
-      border: 2px solid #ffd700;
-      background: transparent;
-      color: #ffd700;
-      cursor: pointer;
-    }
-
-    .download_Resume:hover {
-      background-color: #ffd700;
-      color: black;
-    }
-
-    .hamburger {
-      display: none;
-      font-size: 28px;
-      color: #ffd700;
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: #0d025e;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        padding: 1rem;
-      }
-      .nav-links.active { display: flex; }
-      .hamburger { display: block; }
-    }
+    /*=== About section ===*/
 
     .about-section {
       padding: 4rem 2rem;
@@ -202,7 +129,7 @@
 <body>
   <!-- === NAVIGATION BAR === -->
   <nav>
-    <img class="Navlogo" src="./Assets/logo.png" alt="Logo">
+    <a href="index.html"><img class="Navlogo" src="./Assets/logo.png" alt="Logo"></a>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
       <li><a href="aboutme.html"><i class="fas fa-user"></i> ABOUT ME</a></li>
