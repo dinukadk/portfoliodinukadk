@@ -1,149 +1,89 @@
-*{
-    margin: 0px;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.Navlogo{
-    width: 190px;
-}
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0c0c1d;
+      color: #fff;
+    }
 
-nav{
-    background-color: #0d025e;
-    display: flex;
-    flex-direction: row;
-    color: #ffd700;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1px 10px;
-    font-size: 15px;
-    margin-bottom: 0;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.capitalDlogo{
-    position: absolute;
-    top: 52px;
-    right: 31px;
-    width: 112px;
-    height: 112px;
-}
+    
+/* === NAVIGATION ===*/
+    nav {
+      background-color: #0d025e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 2rem;
+      position: relative;
+      z-index: 1000;
+    }
 
-.capitalDlogo:hover{
-    width: 224px;
-    height: 224px;
-}
+    .Navlogo { width: 190px; }
 
-.dinukaLogo{
-    position: absolute;
-    top: 73px;
-    left: 20px;
-    width: 85px;
-    height: 85px;
-}
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
 
-.dinukaLogo:hover{
-    width: 170px;
-    height: 170px;
-}
+    .nav-links li a {
+      color: #ffd700;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-ul{
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    gap: 2rem;
-    align-items: center;
-}
+    .nav-links li a:hover {
+      color: #e00b0b;
+      background-color: #ffffff10;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
 
-.download_Resume{
-    font-size: 16px;
-    border: none;
-    padding: 0.2rem 0.5rem;
-    border-radius: 20px;
-    background-color: rgb(36, 36, 216);
-    color: rgb(139, 177, 207);
-}
+    .download_Resume {
+      font-size: 15px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 2px solid #ffd700;
+      background: transparent;
+      color: #ffd700;
+      cursor: pointer;
+    }
 
-.download_Resume:hover{
-    font-size: 17px;
-    font-weight: bolder;
-    background-color: #ffd700;
-    color: black;
-}
+    .download_Resume:hover {
+      background-color: #ffd700;
+      color: black;
+    }
 
-.Details{
-    text-align: center;
-    justify-content: center;
-    height: 1000px;
-    background-color: black;
-    padding: 4rem 3rem;
-    color: #FFFFFF;
-}
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      color: #ffd700;
+      cursor: pointer;
+    }
 
-.hello{
-    font-size: 60px;
-}
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #0d025e;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+      }
+      .nav-links.active { display: flex; }
+      .hamburger { display: block; }
+    }
+/*End of nav*/
 
-.hello:hover{
-    color: #e00b0b;
-}
-
-.DetailsH:hover{
-    color: #adf30b;
-}
-
-.DinukaPhoto:hover{
-    height: 550px;
-    width: 550px;
-}
-
-.caption{
-    font-size: 22px;
-    color: white;
-    opacity: 35%;
-    padding: 1rem 12%;  
-    gap: 0;
-}
-
-nav ul li a {
-    color: #ffd700;
-}
-
-nav ul li a:hover {
-    background-color: #e00b0b;
-    padding: 10px;
-  }
-/* Hamburger default hidden on desktop */
-.hamburger {
-  display: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: #fff;
-}
-
-/* Mobile nav styles */
-@media (max-width: 768px) {
-  nav ul {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    background-color: #000; /* adjust as needed */
-    padding: 10px;
-    border-radius: 8px;
-    z-index: 999;
-  }
-
-  nav ul.active {
-    display: flex;
-  }
-
-  .hamburger {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-
-  nav ul li {
-    margin: 10px 0;
-  }
-}
