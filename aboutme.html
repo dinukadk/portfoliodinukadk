@@ -7,528 +7,350 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
-  <!-- Font Awesome (Correct version) -->
+  
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Global CSS -->
   <link rel="stylesheet" href="css/style.css">
-
-  <style>
-    /*=== About section ===*/
-
-    .about-section {
-      padding: 4rem 2rem;
-      background-color: #121232;
-      text-align: center;
-    }
-
-    .about-section h2 {
-      font-size: 36px;
-      color: #ffd700;
-      margin-bottom: 2rem;
-    }
-
-    .aboutMe-section {
-      background-color: #0c0c1d; 
-    }
-
-
-    .DinukaPhoto {
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      border: 6px solid #ffd700;
-      margin: 2rem auto 1rem auto;
-      display: block;
-      transition: 0.3s ease-in-out;
-    }
-
-    .DinukaPhoto:hover {
-      transform: scale(1.05);
-    }
-
-    .personal-info p {
-      font-size: 18px;
-      margin: 0.5rem 0;
-    }
-
-    .about-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .about-card {
-      background-color: #1e1e3f;
-      border: 2px solid #ffd700;
-      padding: 2rem;
-      border-radius: 16px;
-      width: 280px;
-      transition: 0.3s;
-    }
-
-    .about-card:hover {
-      background-color: #ffd700;
-      color: black;
-      transform: translateY(-10px);
-      cursor: pointer;
-    }
-
-    .about-card h3 { margin-bottom: 0.5rem; }
-
-    @media (max-width: 768px) {
-      .about-cards {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    .section-block {
-  padding: 4rem 2rem;
-  background-color: #0c0c1d;
-  color: #fff;
-  text-align: center;
-}
-
-.cert-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  border: 2px solid #ffd700;
-  border-radius: 10px;
-  background-color: transparent;
-  color: #ffd700;
-  font-weight: bold;
-  transition: 0.3s;
-  margin-top: 1rem;
-}
-
-.cert-btn:hover {
-  background-color: #ffd700;
-  color: black;
-}
-
-.project-placeholder {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.placeholder-box {
-  width: 300px;
-  height: 200px;
-  background-color: #1e1e3f;
-  border: 2px dashed #ffd700;
-  border-radius: 12px;
-}
-
-/*000000000000000000000000000000000000000*/
-
-.project-images-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-bottom: 1rem;
-}
-
-.project-images-grid img {
-  width: 100%;
-  border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
-}
-
-/* Hover or tap zoom */
-.project-images-grid img:hover {
-  transform: scale(1.05);
-}
-
-/* Mobile optimization */
-@media (max-width: 600px) {
-  .project-images-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-</style>
 </head>
 
 <body>
-  <!-- === NAVIGATION BAR === -->
+
+  <!-- ================= NAVIGATION ================= -->
   <nav>
-    <a href="index.html"><img class="Navlogo" src="./Assets/logo.png" alt="Logo"></a>
+    <a href="index.html">
+      <img class="Navlogo" src="./Assets/logo.png" alt="Logo">
+    </a>
+
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
       <li><a href="aboutme.html"><i class="fas fa-user"></i> ABOUT ME</a></li>
       <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
       <li><button class="download_Resume"><i class="fas fa-download"></i> Resume</button></li>
     </ul>
-    <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
   </nav>
 
-  <!-- === ABOUT ME SECTION === -->
-  <section class="about-section aboutMe-section" id="aboutMe">
-    <h2>About Me</h2>
-    <img src="./Assets/About Section Photo 1.png" alt="Dinuka" class="DinukaPhoto">
-    <div class="personal-info">
+
+  <!-- ================= ABOUT ME ================= -->
+  <section class="about-wrapper">
+    <h2 class="section-title">About Me</h2>
+
+    <img src="./Assets/About Section Photo 1.png" class="profile-photo" alt="Dinuka">
+
+    <div class="bio-grid">
       <p><strong>Full Name:</strong> Dinuka D. Kirindage</p>
-      <p><strong>Date of Birth:</strong> April 10, 2003</p>
+      <p><strong>DOB:</strong> April 10, 2003</p>
       <p><strong>Address:</strong> Galle, Sri Lanka</p>
       <p><strong>G.C.E O/L:</strong> 2A, 2C, 5B</p>
       <p><strong>G.C.E A/L:</strong> 1B, 1C, 1S</p>
     </div>
 
-    <div class="about-cards">
-      <a href="#techSection" class="about-card">
-        <h3>Me as a Tech Enthusiast</h3>
+    <div class="roles-grid">
+      <a href="#techSection" class="role-card">
+        <h3>Tech Enthusiast</h3>
         <p>IT Undergraduate at SLIIT</p>
       </a>
-      <a href="#politicsSection" class="about-card">
-        <h3>Me as a Political Activist</h3>
+
+      <a href="#politicsSection" class="role-card">
+        <h3>Political Activist</h3>
         <p>Active Party Member</p>
       </a>
-      <a href="#businessSection" class="about-card">
-        <h3>Me as an Entrepreneur</h3>
+
+      <a href="#businessSection" class="role-card">
+        <h3>Entrepreneur</h3>
         <p>Business Owner & Investor</p>
       </a>
     </div>
   </section>
 
-  <!-- === TECH SECTION === -->
-  <section id="techSection" class="about-section">
-    <h2>Me as a Tech Enthusiast</h2>
-    <p style="max-width: 800px; margin: 1.5rem auto; font-size: 18px; line-height: 1.8;">
-      I studied Information & Communication Technology for my G.C.E Advanced Level examination.
-      Now, I’m currently pursuing my Bachelor’s Degree in IT at SLIIT. I’m also taking online courses 
-      many of which I've completed and earned certificates for. These certifications are already listed on my LinkedIn profile.
+
+  <!-- ================= TECH SECTION ================= -->
+  <section id="techSection" class="section-block">
+    <h2 class="section-title">Me as a Tech Enthusiast</h2>
+
+    <p class="section-text">
+      I have been passionate about technology from school, completing ICT for A/L and now pursuing
+      my Bachelor's Degree in IT at SLIIT. I consistently upskill myself through online courses,
+      earning certifications that strengthen my technical foundation.
     </p>
 
     <a href="https://www.linkedin.com/in/dinukadk/details/certifications/" target="_blank" class="cert-btn">
       View My Certifications
     </a>
 
-    <br><br><hr style="margin: 3rem auto; width: 80%; border: 1px solid #ffd700;"><br>
+    <hr class="divider">
 
-    <h3 style="color:#ffd700; font-size: 24px;">Projects Showcase</h3>
-    <p>I'm currently working on some exciting projects. Once completed, I’ll upload them here with images and details.</p>
+    <h3 class="sub-title">Projects Showcase</h3>
+    <p class="section-text">Below are some of my highlighted academic and personal projects.</p>
+
 
     <!-- HungerFix -->
-    <div class="project-placeholder">
-       <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 500px; padding: 1rem; text-align: center;">
-      <!-- === <img src="./Assets/HungerFix.png" alt="HungerFix" style="width: 100%; border-radius: 12px;"> -->
-      <!-- === <img src="./Assets/HungerFix.png" alt="HungerFix" style="width: 100%; border-radius: 12px;"> -->
-       <div class="project-images-grid">
-          <!--<img src="./Assets/HungerFix1.png" alt="HungerFix Screen 1" style="width: 100%; border-radius: 12px;"> -->
-          <img src="./Assets/HungerFix.png" alt="HungerFix Screen 2" style="width: 100%; border-radius: 12px;">
-          <img src="./Assets/HungerFix.png" alt="HungerFix Screen 3" style="width: 100%; border-radius: 12px;">
-          <img src="./Assets/HungerFix.png" alt="HungerFix Screen 4" style="width: 100%; border-radius: 12px;">
+    <div class="project-card">
+      <div class="project-images-grid">
+        <img src="./Assets/HungerFix.png" alt="">
+        <img src="./Assets/HungerFix.png" alt="">
+        <img src="./Assets/HungerFix.png" alt="">
       </div>
 
-        <br><h2 style="margin-top: 1rem; color: #ffd700;">HungerFix</h2>
-        <p style="font-size: 18px;">
-          HungerFix is my very first Figma project, built as part of the Mobile Application Development module during my 2nd year at SLIIT.<br><br>
-          The app offers a clean, intuitive interface to connect users with delicious homemade meals. It was designed with a focus on user flow, mobile-first design, and visual consistency.<br><br>
-          This project helped me practice core UI/UX skills such as wireframing, prototyping, and applying usability heuristics.<br><br>
-          Want to see it in action? Check out the demo below on LinkedIn or explore it directly on Figma.<br><br>
-         <a href="https://www.figma.com/proto/Kv8lBDBfrZ7cZuq644CxCx/Hunger_Fix?node-id=28-189&starting-point-node-id=6%3A3&t=gsjgafLE2D8xnznO-1" target="_blank" class="cert-btn">
-          View on Figma
-         </a> 
-        <a href="https://www.linkedin.com/posts/dinukadk_figma-mobileappdevelopment-figmadesign-activity-7352096505215807488-YYck?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELhA4EBO3YXnutrX_4krLaNtKOQRZ8k1EU" target="_blank" class="cert-btn">
-          View LinkedIn Demo
-        </a> 
-        </p>
+      <h2 class="project-title">HungerFix</h2>
+      <p class="project-text">
+        HungerFix is my first full Figma mobile app project built for the Mobile Application Development module.
+        It focuses on clean UI, smooth navigation, and user-first design principles.
+      </p>
+
+      <a href="https://www.figma.com/proto/Kv8lBDBfrZ7cZuq644CxCx/Hunger_Fix" target="_blank" class="cert-btn">View on Figma</a>
+      <a href="https://www.linkedin.com/posts/dinukadk_figma-mobileappdevelopment" target="_blank" class="cert-btn">View LinkedIn Demo</a>
+    </div>
+
+
+    <!-- Power BI -->
+    <div class="project-card">
+      <img src="./Assets/PowerBI_Post.png" class="project-thumbnail">
+
+      <h2 class="project-title">PowerBI Documentation</h2>
+      <p class="project-text">
+        Complete PDF documentation prepared and explained through my YouTube channel.
+      </p>
+
+      <a href="./Assets/Lab6PDF.pdf" download class="cert-btn">Download LAB 6 PDF</a>
+      <a href="./Assets/LabSheet_8_Act1.pdf" download class="cert-btn">Download LAB 8 PDF</a>
+    </div>
+
+
+    <!-- Rover UI/UX -->
+    <div class="project-card">
+      <div class="project-images-grid">
+        <img src="./Assets/HCI_Project_1.png">
+        <img src="./Assets/HCI_Project_2.png">
+        <img src="./Assets/HCI_Project_3.png">
       </div>
 
-        <!-- === DS&A lab 6 YouTube Project with PDF Download === -->
-      <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 500px; padding: 1rem; text-align: center; margin-top: 2rem;">
-        <a href="https://youtube.com/@dinuka_d._kirindage?si=6p4XRVA8f6YEhzhH" target="_blank">
-          <img src="./Assets/PowerBI_Post.png" alt="YouTube Project Thumbnail" style="width: 100%; border-radius: 12px;">
-        </a>
+      <h2 class="project-title">Rover P6 – UI/UX Redesign</h2>
+      <p class="project-text">
+        Redesigned the Rover P6 classic parts website with improved login, cart, and checkout experiences.
+      </p>
 
-        <br><br><h2 style="margin-top: 1rem; color: #ffd700;">DOCUMENTS for PowerBI videos</h2>
-        <p style="font-size: 18px;">
-          This project was explained in my YouTube video. You can download the supporting PDF file below.<br><br>
-        </p>
+      <a href="https://www.figma.com/design/2WgiTz20dH0o0j6uUntzJR" target="_blank" class="cert-btn">View on Figma</a>
+      <a href="https://www.linkedin.com/posts/dinukadk_uxdesign-hci-ecommercedesign" target="_blank" class="cert-btn">View LinkedIn Post</a>
+    </div>
 
-        <!-- Button to Download PDF -->
-        <a href="./Assets/Lab6PDF.pdf" download class="cert-btn">
-          📄 Download PDF for LAB 6
-        </a>
-      
-        <!-- Button to Download PDF -->
-        <a href="./Assets/LabSheet_8_Act1.pdf" download class="cert-btn">
-          📄 Download PDF for LAB 8
-        </a>
+  </section>
+
+
+  <!-- ================= POLITICS SECTION ================= -->
+  <section id="politicsSection" class="section-block">
+    <h2 class="section-title">Me as a Political Activist</h2>
+
+    <p class="section-text">
+      My political journey started in school and evolved into active involvement in national politics.
+      I have engaged with diverse political leaders, exchanging ideas and gaining experience.
+      Here are key personalities I have worked with.
+    </p>
+
+    <div class="politics-grid">
+
+      <!-- Cards -->
+      <div class="politic-card">
+        <img src="./Assets/Mr.Dilith-Politics.jpg">
+        <h3>Dilith Susantha Jayaweera</h3>
+        <p>Founder of Mawbima Janatha Party, 2024 Presidential Candidate.</p>
       </div>
 
-      <!-- === Rover P6 UI/UX Redesign Project === -->
-<div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 500px; padding: 1rem; text-align: center; margin-top: 2rem;">
+      <div class="politic-card">
+        <img src="./Assets/Mr.Manusha.jpeg">
+        <h3>Manusha Nanayakkara</h3>
+        <p>Minister of Labour & Foreign Employment (2022).</p>
+      </div>
 
-  <!-- Project Images Grid (2x2) -->
-  <div class="project-images-grid">
-      <img src="./Assets/Delete thi image.png" alt="Rover P6 Screen 1" style="width: 200%; max-width: 100%; border-radius: 12px;"> 
-      <img src="./Assets/HCI_Project_2.png" alt="Rover P6 Screen 2" style="width: 200%; max-width: 100%; border-radius: 12px;"> 
-      <img src="./Assets/HCI_Project_3.png" alt="Rover P6 Screen 3" style="width: 200%; max-width: 100%; border-radius: 12px;"> 
-    
-      <!-- <img src="./Assets/Rover4.png" alt="Rover P6 Screen 4" style="width: 100%; border-radius: 12px;"> -->
-  </div>
+      <div class="politic-card">
+        <img src="./Assets/Mr.Udaya.jpg">
+        <h3>Udaya Gammanpila</h3>
+        <p>Leader of PHU. Former Energy Minister.</p>
+      </div>
 
-  <br><br><h2 style="margin-top: 1rem; color: #ffd700;">Rover P6 – UI/UX Redesign</h2>
+      <!-- Add more cards as needed -->
 
-  <p style="font-size: 18px;">
-    As part of our HCI module, my team redesigned the e-commerce experience for the 
-    Rover P6 Classic Car Parts website. <br><br>
-    I personally handled three critical user flows: <br>
-    🔐 Login Experience &nbsp; &nbsp; <br>🛒 Shopping Cart &nbsp; &nbsp; <br>💳 Checkout / Payment<br><br>
-    The redesign focuses on usability, clarity, and reducing friction while 
-    maintaining the heritage identity of the brand.<br><br>
-    A short demo video is available on LinkedIn, and the full redesign is available on Figma.
-  </p>
-
-  <!-- Buttons -->
-  <a href="https://www.figma.com/design/2WgiTz20dH0o0j6uUntzJR/HCI-Project-share--3Y1S-?node-id=0-1&t=b9MlYY41yqonPJ7O-1" 
-     target="_blank" class="cert-btn">
-    View on Figma
-  </a>
-
-  <a href="https://www.linkedin.com/posts/dinukadk_uxdesign-hci-ecommercedesign-activity-7398740206742536192-GRoB?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELhA4EBO3YXnutrX_4krLaNtKOQRZ8k1EU" 
-     target="_blank" class="cert-btn">
-    View LinkedIn Post
-  </a>
-
-</div>
-
-
-<!--  <div class="placeholder-box"></div>  -->
-<!--  <div class="placeholder-box"></div>  -->
     </div>
   </section>
 
-  <!-- === POLITICAL JOURNEY SECTION === -->
-<section id="politicsSection" class="about-section">
 
-  <!-- Section Title -->
-  <h2>Me as a Political Activist</h2>
-
-  <!-- Intro Paragraph -->
-<p style="max-width: 800px; margin: 1.5rem auto; font-size: 18px; line-height: 1.8;">
-  I have been interested in politics since my school days and am a dedicated young man who aspires for a better social system.
-  I started party politics systematically with Mr. Dilith Jayaweera in his then Mawbima Janatha Party. In a short time,
-  I was elected as a Youth Executive Committee member. While actively carrying out political activities in that party,
-  I also met and discussed with mature politicians with both similar and contrasting ideologies, always seeking wisdom
-  and advice from them. Below are some memorable moments captured with political leaders, activists, and from special political events.
-</p>
+  <!-- ================= FOOTER FIX LATER ================= -->
 
 
-  <!-- === PHOTO GALLERY WRAPPER === -->
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
+  <!-- ================= INLINE CUSTOM STYLES ================= -->
+  <style>
 
-    <!-- === POLITICIAN CARD 1 === -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Dilith-Politics.jpg" alt="Dilith Jayaweera" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Dilith Susantha Jayaweera</h3>
-      <p style="font-size: 15px;">
-        Founder of Mawbima Janatha Party. Presidential candidate in 2024. Current MP via National List. Media mogul, lawyer & political leader.
-      </p>
-    </div>
+    /* GENERAL */
+    .about-wrapper{
+      padding: 4rem 2rem;
+      background:#0c0c1d;
+      text-align:center;
+    }
 
-    <!-- === POLITICIAN CARD 2 === -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Manusha.jpeg" alt="Manusha Nanayakkara" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Manusha Nanayakkara</h3>
-      <p style="font-size: 15px;">
-        Minister of Labour & Foreign Employment (2022). Currently serving as Advisor to the President on Labour & Employment affairs.
-      </p>
-    </div>
+    .section-title{
+      color:#ffd700;
+      font-size:36px;
+      margin-bottom:2rem;
+      text-transform:uppercase;
+    }
 
-    <!-- === POLITICIAN CARD 3 === -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Udaya.jpg" alt="Udaya Gammanpila" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Udaya Prabath Gammanpila</h3>
-      <p style="font-size: 15px;">
-        Leader of Pivithuru Hela Urumaya. Former Minister of Energy, Parliamentarian for Colombo District, and advocate of nationalist values.
-      </p>
-    </div>
+    .profile-photo{
+      width:300px;
+      height:300px;
+      border-radius:50%;
+      border:6px solid #ffd700;
+      display:block;
+      margin:0 auto 2rem;
+      transition:0.3s;
+    }
+    .profile-photo:hover{ transform:scale(1.05); }
 
-    <!-- === POLITICIAN CARD 4 === -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Channa.jpg" alt="Channa Jayasumana" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Channa Jayasumana</h3>
-      <p style="font-size: 15px;">
-        Former State Minister of Pharmaceuticals & Cabinet Minister of Health during Sri Lanka's reform period post-2022.
-      </p>
-    </div>
+    .bio-grid{
+      font-size:18px;
+      line-height:1.6;
+    }
 
-    <!-- === POLITICIAN CARD 5 === -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Wimal.jpg" alt="Wimal Weerawansa" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Wimal Weerawansa</h3>
-      <p style="font-size: 15px;">
-        Leader of the National Freedom Front (NFF). Held cabinet roles in industries, construction, housing, and SME development.
-      </p>
-    </div>
-
-    <!-- === POLITICIAN CARD 6 === -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/SeelarathanaThero.jpeg" alt="Seelarathana Thero" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Baththaramulle Seelarathana Thero</h3>
-      <p style="font-size: 15px;">
-        Leader of Janasetha Peramuna. Presidential candidate in 2020 & 2024, advocating for "One Country, One Nation, One Law".
-      </p>
-    </div>
-
-  <!-- === POLITICIAN CARD 7 === -->
-  <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-    <img src="./Assets/Mr.Namal.jpg" alt="Namal Rajapaksa" style="width: 100%; border-radius: 12px;">
-    <h3 style="margin-top: 1rem; color: #ffd700;">Lakshman Namal Rajapaksa</h3>
-    <p style="font-size: 15px;">
-    Appointed National Organizer of the SLPP in 2024 and ran as the youngest presidential candidate in the same year. Placed 4th with 2.57% of the vote, Former Minister of Youth & Sports (2020–2022). 
-  </p>
-</div>
-
-  <!-- === POLITICIAN CARD 8 === -->
-  <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-    <img src="./Assets/Ms.Namini.jpeg" alt="Namini Panditha" style="width: 100%; border-radius: 12px;">
-    <h3 style="margin-top: 1rem; color: #ffd700;">Namini Panditha</h3>
-    <p style="font-size: 15px;">
-    Founder of Liberal Youth Movement & Future for Her. <br>Attorney at Law of the Supreme Court of Sri Lanka with LLB (Hons) from University of Colombo and LLM from Staffordshire University, UK. <br>Chief Operating Officer of Liberal Youth Movement, a political think tank promoting liberal values and inclusive politics.  </p>
-</div>
-
-  <!-- === POLITICIAN CARD 9 === -->
-  <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-    <img src="./Assets/Mr.Sagara.jpeg" alt="Sagara Kaliyawasam" style="width: 100%; border-radius: 12px;">
-    <h3 style="margin-top: 1rem; color: #ffd700;">Sagara Kaliyawasam</h3>
-    <p style="font-size: 15px;">
-    General Secretary of Sri Lanka Podujana Peramuna (SLPP). National List MP in Parliament of Sri Lanka following the 2020 parliamentary election. Attorney at Law with extensive experience in political administration and party organization.
-  </div>
-
-  <!-- === POLITICIAN CARD 10 === -->
-  <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-    <img src="./Assets/Mr.Sagara2.jpeg" alt="Sagara Kaliyawasam3" style="width: 100%; border-radius: 12px;">
-    <img src="./Assets/Mr.Sagara3.jpeg" alt="Sagara Kaliyawasam2" style="width: 100%; border-radius: 12px;">
-    <h3 style="margin-top: 1rem; color: #ffd700;">Sagara Kaliyawasam</h3>
-    <p style="font-size: 15px;">
-    Received a certificate from Mr. Sagara Ratnayaka at the International Human Rights Program held on 21.09.2025 at BMICH.
-  </div>
-   
-
-  </div>
-
-</section>
+    .roles-grid{
+      margin-top:3rem;
+      display:flex;
+      justify-content:center;
+      gap:2rem;
+      flex-wrap:wrap;
+    }
+    .role-card{
+      background:#1e1e3f;
+      border:2px solid #ffd700;
+      width:260px;
+      padding:1.5rem;
+      border-radius:16px;
+      transition:0.3s;
+    }
+    .role-card:hover{
+      background:#ffd700;
+      color:black;
+      transform:translateY(-10px);
+    }
 
 
-  <!-- === ENTREPRENEUR SECTION === -->
-<section id="businessSection" class="about-section">
+    /* SECTIONS */
+    .section-block{
+      padding:4rem 2rem;
+      background:#121232;
+      text-align:center;
+    }
+    .section-text{
+      max-width:800px;
+      margin:1.5rem auto;
+      font-size:18px;
+      line-height:1.8;
+    }
 
-  <!-- Section Heading -->
-  <h2>Me as an Entrepreneur</h2>
+    .divider{
+      width:80%;
+      border:1px solid #ffd700;
+      margin:3rem auto;
+    }
 
-  <!-- Intro Paragraph -->
-  <p style="max-width: 800px; margin: 1.5rem auto; font-size: 18px; line-height: 1.8;">
-    Currently, I manage my father’s book shop, while also building a brand called <strong>"CapitalD"</strong>. 
-    My goal is to expand this into a full-scale business group in the near future something like <strong>CapitalD Business Group</strong>  
-    spanning tech, media, innovation, and education. I’m already shaping up several business ideas and plan to execute them once I complete my IT degree.
-  </p>
+    .sub-title{
+      font-size:24px;
+      color:#ffd700;
+    }
 
-  <!-- === BUSINESS PHOTO SHOWCASE === -->
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
 
-    <!-- 1. Father's Bookshop -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/DinukaBookShop.jpg" alt="Dinuka Book Shop" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Dinuka Book Shop</h3>
-      <p style="font-size: 15px;">
-        My father's legacy a trusted local bookshop that I currently manage. It taught me business ethics and customer service from the ground up.
-      </p>
-    </div>
+    /* BUTTON */
+    .cert-btn{
+      display:inline-block;
+      padding:10px 20px;
+      border:2px solid #ffd700;
+      color:#ffd700;
+      border-radius:10px;
+      margin:0.5rem;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    .cert-btn:hover{
+      background:#ffd700;
+      color:black;
+    }
 
-    <!-- 2. Dilith Jayaweera (as Business Tycoon) -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Dilith-Business.jpg" alt="Dilith Jayaweera" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Dilith Jayaweera</h3>
-      <p style="font-size: 15px;">
-        A diversified business giant who owns or controls 40+ companies across media, finance, hospitality, and more. A personal inspiration in both politics and enterprise.
-      </p>
-    </div>
 
-    <!-- 3. Dhanushka Fernando (Finez) -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Dhanushka.jpg" alt="Dhanushka Fernando" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Dhanushka Fernando</h3>
-      <p style="font-size: 15px;">
-        Award-winning entrepreneur behind Finez a premium interior & furniture brand focused on innovation, sustainability, and local craftsmanship.
-      </p>
-    </div>
+    /* PROJECTS */
+    .project-card{
+      background:#1e1e3f;
+      border:2px solid #ffd700;
+      width:500px;
+      max-width:100%;
+      padding:1.5rem;
+      margin:2rem auto;
+      border-radius:16px;
+      text-align:center;
+    }
+    .project-images-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+    .project-images-grid img{
+      width:100%;
+      border-radius:8px;
+      transition:0.3s;
+    }
+    .project-images-grid img:hover{
+      transform:scale(1.05);
+    }
 
-    <!-- 4. Dhanika Perera (Helakuru) -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Dhanika.jpeg" alt="Dhanika Perera" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Dhanika Perera</h3>
-      <p style="font-size: 15px;">
-        Founder of Bhasha Lanka and creator of Helakuru. A key figure in tech entrepreneurship and digital localization in Sri Lanka.
-      </p>
-    </div>
+    .project-title{
+      color:#ffd700;
+      margin-top:1rem;
+      font-size:24px;
+    }
 
-    <!-- 5. Dilshan Abeygunawardana (Olee AI) -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Dilshan.jpeg" alt="Dilshan Abeygunawardana" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Dilshan Abeygunawardana</h3>
-      <p style="font-size: 15px;">
-        Co-founder of Olee AI and global top NFT freelancer. His journey inspires my vision to combine tech, business, and creativity.
-      </p>
-    </div>
+    .project-text{
+      font-size:18px;
+      margin:1rem 0;
+    }
 
-    <!-- 6. Dulith Herath (Kapruka) -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Dulith.jpeg" alt="Dulith Herath" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Dulith Herath</h3>
-      <p style="font-size: 15px;">
-        Serial entrepreneur behind Kapruka.com and Java Lounge. A symbol of innovation in Sri Lanka’s e-commerce and logistics sectors.
-      </p>
-    </div>
+    .project-thumbnail{
+      width:100%;
+      border-radius:12px;
+    }
 
-    <!-- 7. Chandana Sooriyabandara (Media Entrepreneur) -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Mr.Chandana.jpeg" alt="Chandana Sooriyabandara" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Chandana Sooriyabandara</h3>
-      <p style="font-size: 15px;">
-        Veteran media executive and current Presidential Media Advisor. His entrepreneurial mindset reshaped Sri Lankan journalism and media ethics.
-      </p>
-    </div>
 
-    <!-- 8. Ranil Sugathadasa (CEO Coach) -->
-    <div style="background-color: #1e1e3f; border: 2px solid #ffd700; border-radius: 12px; width: 280px; padding: 1rem; text-align: center;">
-      <img src="./Assets/Dr.Ranil.jpg" alt="Ranil Sugathadasa" style="width: 100%; border-radius: 12px;">
-      <h3 style="margin-top: 1rem; color: #ffd700;">Ranil Sugathadasa <br> (CEO Coach)</h3>
-      <p style="font-size: 15px;">
-        Author, motivational speaker, and senior lecturer at the University of Moratuwa, Dr. Ranil Sugathadasa is a renowned CEO coach who has trained over 1.2 
-        million individuals and helped 1000+ organizations locally and internationally.      </p>
-    </div>
+    /* POLITICS */
+    .politics-grid{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:2rem;
+      margin-top:3rem;
+    }
+    .politic-card{
+      background:#1e1e3f;
+      border:2px solid #ffd700;
+      width:260px;
+      border-radius:12px;
+      padding:1rem;
+      text-align:center;
+    }
+    .politic-card img{
+      width:100%;
+      border-radius:12px;
+    }
 
-  </div>
+  </style>
 
-</section>
-
+  <!-- MENU JS -->
   <script>
-    function toggleMenu() {
-      const navLinks = document.getElementById("nav-links");
-      navLinks.classList.toggle("active");
+    function toggleMenu(){
+      const nav = document.getElementById("nav-links");
+      nav.classList.toggle("active");
     }
   </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
