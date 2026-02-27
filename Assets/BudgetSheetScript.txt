@@ -1,0 +1,452 @@
+function createMonthlySheet(monthName, daysInMonth) {
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  
+  // Create or get the sheet for this month
+  let sheet = spreadsheet.getSheetByName(monthName);
+  if (sheet) {
+    sheet.clear();
+    // Remove all existing protections
+    const protections = sheet.getProtections(SpreadsheetApp.ProtectionType.RANGE);
+    for (let i = 0; i < protections.length; i++) {
+      protections[i].remove();
+    }
+  } else {
+    sheet = spreadsheet.insertSheet(monthName);
+  }
+  
+  // Set column widths
+  sheet.setColumnWidth(1, 50);  // Empty column A
+  sheet.setColumnWidth(2, 50);  // Empty column B
+  sheet.setColumnWidth(3, 200); // Date
+  sheet.setColumnWidth(4, 130); // Amount
+  sheet.setColumnWidth(5, 280); // Note
+  sheet.setColumnWidth(6, 150); // Day Limit
+  sheet.setColumnWidth(7, 150); // Days to Survive
+  
+  // MAIN HEADER
+  sheet.getRange('C1:G1').merge().setValue('💰 MONTHLY BUDGET TRACKER')
+    .setFontSize(24).setFontWeight('bold').setHorizontalAlignment('center')
+    .setBackground('#1A1A2E').setFontColor('#FFFFFF')
+    .setVerticalAlignment('middle');
+  sheet.setRowHeight(1, 50);
+  
+  // Month Input Section
+  sheet.getRange('C3').setValue('📅 Month:').setFontWeight('bold').setFontSize(12);
+  sheet.getRange('D3:E3').merge().setValue(monthName)
+    .setFontSize(14).setFontWeight('bold')
+    .setBackground('#E8F5E9').setHorizontalAlignment('center')
+    .setBorder(true, true, true, true, true, true, '#4CAF50', SpreadsheetApp.BorderStyle.SOLID_MEDIUM);
+  
+  // Monthly Budget Input
+  sheet.getRange('C5').setValue('💵 Monthly Budget:').setFontWeight('bold').setFontSize(12);
+  sheet.getRange('D5').setValue(0)
+    .setBackground('#2196F3').setFontColor('#FFFFFF')
+    .setFontWeight('bold').setFontSize(16)
+    .setNumberFormat('"Rs "#,##0.00')
+    .setHorizontalAlignment('center')
+    .setBorder(true, true, true, true, true, true, '#1976D2', SpreadsheetApp.BorderStyle.SOLID_THICK);
+  sheet.setRowHeight(5, 40);
+  
+  // Fixed Expenses Header
+  sheet.getRange('C7:D7').merge().setValue('📋 FIXED MONTHLY EXPENSES')
+    .setFontWeight('bold').setFontSize(11)
+    .setBackground('#607D8B').setFontColor('#FFFFFF')
+    .setHorizontalAlignment('center');
+  
+  const expenses = ['🏠 Bodim Fees', '🛡️ CoverUps', '💰 Savings', '📌 Option 1', '📌 Option 2'];
+  const defaultValues = [0, 0, 0, 0, 0];
+  
+  for (let i = 0; i < expenses.length; i++) {
+    sheet.getRange(8 + i, 3).setValue(expenses[i]).setFontWeight('bold');
+    sheet.getRange(8 + i, 4).setValue(defaultValues[i])
+      .setNumberFormat('"Rs "#,##0.00')
+      .setBackground('#F5F5F5')
+      .setHorizontalAlignment('right');
+  }
+  
+  // Summary Calculations
+  sheet.getRange('C14').setValue('📊 Total Fixed:').setFontWeight('bold').setFontSize(11);
+  sheet.getRange('D14').setFormula('=SUM(D8:D12)')
+    .setBackground('#EF5350').setFontColor('#FFFFFF')
+    .setFontWeight('bold').setNumberFormat('"Rs "#,##0.00')
+    .setHorizontalAlignment('center')
+    .setBorder(true, true, true, true, true, true, '#C62828', SpreadsheetApp.BorderStyle.SOLID_MEDIUM);
+  
+  sheet.getRange('C15').setValue('✅ Variable Budget:').setFontWeight('bold').setFontSize(12);
+  sheet.getRange('D15').setFormula('=D5-D14')
+    .setBackground('#66BB6A').setFontColor('#FFFFFF')
+    .setFontWeight('bold').setFontSize(16).setNumberFormat('"Rs "#,##0.00')
+    .setHorizontalAlignment('center')
+    .setBorder(true, true, true, true, true, true, '#388E3C', SpreadsheetApp.BorderStyle.SOLID_THICK);
+  sheet.setRowHeight(15, 40);
+  
+  sheet.getRange('C16').setValue('📅 Per Day Limit (÷' + daysInMonth + '):').setFontWeight('bold');
+  sheet.getRange('D16').setFormula('=D15/' + daysInMonth)
+    .setBackground('#FFA726').setFontColor('#FFFFFF')
+    .setFontWeight('bold').setNumberFormat('"Rs "#,##0.00')
+    .setHorizontalAlignment('center')
+    .setBorder(true, true, true, true, true, true, '#F57C00', SpreadsheetApp.BorderStyle.SOLID_MEDIUM);
+  
+  // Current Balance Section (Right side)
+  sheet.getRange('F5:G5').merge().setValue('💳 CURRENT BALANCE')
+    .setFontWeight('bold').setFontSize(12)
+    .setBackground('#00897B').setFontColor('#FFFFFF')
+    .setHorizontalAlignment('center')
+    .setVerticalAlignment('middle');
+  
+  sheet.getRange('F6:G6').merge().setFormula('=D15+SUM(D20:D)')
+    .setBackground('#26A69A').setFontColor('#FFFFFF')
+    .setFontWeight('bold').setFontSize(20)
+    .setHorizontalAlignment('center').setNumberFormat('"Rs "#,##0.00')
+    .setVerticalAlignment('middle')
+    .setBorder(true, true, true, true, true, true, '#00796B', SpreadsheetApp.BorderStyle.SOLID_THICK);
+  sheet.setRowHeight(6, 50);
+  
+  // Survival Days Display
+  sheet.getRange('F14:G14').merge().setValue('⏳ Days Can Survive')
+    .setFontWeight('bold').setFontSize(11)
+    .setBackground('#7E57C2').setFontColor('#FFFFFF')
+    .setHorizontalAlignment('center');
+  
+  sheet.getRange('F15:G15').merge()
+    .setFormula('=IF($D$16=0,"N/A",($D$15+SUM(D20:D))/$D$16)')
+    .setBackground('#9575CD').setFontColor('#FFFFFF')
+    .setFontWeight('bold').setFontSize(18)
+    .setNumberFormat('0.0 " days"')
+    .setHorizontalAlignment('center')
+    .setVerticalAlignment('middle')
+    .setBorder(true, true, true, true, true, true, '#5E35B1', SpreadsheetApp.BorderStyle.SOLID_THICK);
+  
+  // Transaction Table Headers
+  const headers = ['DATE', 'AMOUNT', 'NOTE', 'DAY LIMIT', 'DAYS TO SURVIVE'];
+  sheet.getRange('C18:G18').setValues([headers])
+    .setFontWeight('bold').setBackground('#37474F').setFontColor('#FFFFFF')
+    .setHorizontalAlignment('center').setFontSize(11)
+    .setVerticalAlignment('middle')
+    .setBorder(true, true, true, true, true, true, '#263238', SpreadsheetApp.BorderStyle.SOLID_THICK);
+  sheet.setRowHeight(18, 35);
+  
+  // Add helper text row
+  sheet.getRange('C19').setValue('Select Date').setFontStyle('italic').setFontSize(9).setFontColor('#999999');
+  sheet.getRange('D19').setValue('Enter amount').setFontStyle('italic').setFontSize(9).setFontColor('#999999');
+  sheet.getRange('E19').setValue('Add note (optional)').setFontStyle('italic').setFontSize(9).setFontColor('#999999');
+  sheet.getRange('F19').setValue('Auto-calculated').setFontStyle('italic').setFontSize(9).setFontColor('#999999');
+  sheet.getRange('G19').setValue('Auto-calculated').setFontStyle('italic').setFontSize(9).setFontColor('#999999');
+  sheet.getRange('C19:G19').setBackground('#FAFAFA');
+  
+  // First data row formulas (row 20)
+  sheet.getRange('F20').setFormula('=IF(C20="","",IF(C20=C19,F19+D20,$D$16+D20))');
+  sheet.getRange('G20').setFormula('=IF(C20="","",' + daysInMonth + '-DAY(C20))');
+  
+  // Copy formulas down
+  sheet.getRange('F20:G20').copyTo(sheet.getRange('F21:G1019'));
+  
+  // Format numbers
+  sheet.getRange('D20:D').setNumberFormat('"Rs "#,##0.00');
+  sheet.getRange('F20:F').setNumberFormat('"Rs "#,##0.00');
+  sheet.getRange('G20:G').setNumberFormat('0.0 " days"');
+  
+  // Add borders
+  sheet.getRange('C20:G1019').setBorder(true, true, true, true, true, true, '#E0E0E0', SpreadsheetApp.BorderStyle.SOLID);
+  
+  // Conditional formatting
+  const dayLimitRange = sheet.getRange('F20:F');
+  const rule1 = SpreadsheetApp.newConditionalFormatRule()
+    .whenNumberLessThan(0)
+    .setBackground('#FFCDD2')
+    .setFontColor('#C62828')
+    .setRanges([dayLimitRange])
+    .build();
+  const rule2 = SpreadsheetApp.newConditionalFormatRule()
+    .whenNumberGreaterThanOrEqualTo(0)
+    .setBackground('#E1F5FE')
+    .setRanges([dayLimitRange])
+    .build();
+  
+  const survivalRange = sheet.getRange('G20:G');
+  const rule3 = SpreadsheetApp.newConditionalFormatRule()
+    .whenNumberLessThan(7)
+    .setBackground('#FFCDD2')
+    .setFontColor('#C62828')
+    .setBold(true)
+    .setRanges([survivalRange])
+    .build();
+  const rule4 = SpreadsheetApp.newConditionalFormatRule()
+    .whenNumberBetween(7, 13.99)
+    .setBackground('#FFF9C4')
+    .setFontColor('#F57F17')
+    .setBold(true)
+    .setRanges([survivalRange])
+    .build();
+  const rule5 = SpreadsheetApp.newConditionalFormatRule()
+    .whenNumberGreaterThanOrEqualTo(14)
+    .setBackground('#C8E6C9')
+    .setFontColor('#2E7D32')
+    .setBold(true)
+    .setRanges([survivalRange])
+    .build();
+  
+  const rules = sheet.getConditionalFormatRules();
+  rules.push(rule1, rule2, rule3, rule4, rule5);
+  sheet.setConditionalFormatRules(rules);
+  
+  // Freeze rows and columns
+  sheet.setFrozenRows(19);
+  sheet.setFrozenColumns(2);
+  
+  // Add data validation
+  const dateRange = sheet.getRange('C20:C');
+  const dateValidation = SpreadsheetApp.newDataValidation()
+    .requireDate()
+    .setAllowInvalid(true)
+    .setHelpText('Enter date in format: MM/DD/YYYY')
+    .build();
+  dateRange.setDataValidation(dateValidation);
+  
+  // Align columns
+  sheet.getRange('C20:C').setHorizontalAlignment('center');
+  sheet.getRange('D20:D').setHorizontalAlignment('right');
+  sheet.getRange('F20:G').setHorizontalAlignment('center');
+  
+  // ========================================
+  // 🔒 PROTECT RANGES WITH WARNINGS
+  // ========================================
+  
+  // Protection 1: Header and Month Section (F5:G6)
+  const protection1 = sheet.getRange('C1:G7').protect();
+  protection1.setDescription('⚠️ Header & Month Name - Contains important labels');
+  protection1.setWarningOnly(true);
+  
+  // Protection 2: Summary Section (C14:G19)
+  const protection2 = sheet.getRange('C14:G19').protect();
+  protection2.setDescription('⚠️ Summary & Headers - Contains formulas and labels');
+  protection2.setWarningOnly(true);
+  
+  // Protection 3: Expense Labels (C8:C12)
+  // const protection3 = sheet.getRange('C8:C12').protect();
+  // protection3.setDescription('⚠️ Expense Labels - Fixed expense names');
+  // protection3.setWarningOnly(true);
+  
+  // Protection 4: Auto-calculated Columns (F20:G1000)
+  const protection4 = sheet.getRange('F20:G1000').protect();
+  protection4.setDescription('⚠️ Auto-Calculated - Day Limit & Days to Survive formulas');
+  protection4.setWarningOnly(true);
+}
+
+// Create individual month sheets - ALL UPDATED TO 2026
+function createJanuary() {
+  createMonthlySheet('January 2026', 31);
+  SpreadsheetApp.getUi().alert('✅ January 2026 sheet created with 31 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createFebruary() {
+  createMonthlySheet('February 2026', 28);
+  SpreadsheetApp.getUi().alert('✅ February 2026 sheet created with 28 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createMarch() {
+  createMonthlySheet('March 2026', 31);
+  SpreadsheetApp.getUi().alert('✅ March 2026 sheet created with 31 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createApril() {
+  createMonthlySheet('April 2026', 30);
+  SpreadsheetApp.getUi().alert('✅ April 2026 sheet created with 30 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createMay() {
+  createMonthlySheet('May 2026', 31);
+  SpreadsheetApp.getUi().alert('✅ May 2026 sheet created with 31 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createJune() {
+  createMonthlySheet('June 2026', 30);
+  SpreadsheetApp.getUi().alert('✅ June 2026 sheet created with 30 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createJuly() {
+  createMonthlySheet('July 2026', 31);
+  SpreadsheetApp.getUi().alert('✅ July 2026 sheet created with 31 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createAugust() {
+  createMonthlySheet('August 2026', 31);
+  SpreadsheetApp.getUi().alert('✅ August 2026 sheet created with 31 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createSeptember() {
+  createMonthlySheet('September 2026', 30);
+  SpreadsheetApp.getUi().alert('✅ September 2026 sheet created with 30 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createOctober() {
+  createMonthlySheet('October 2026', 31);
+  SpreadsheetApp.getUi().alert('✅ October 2026 sheet created with 31 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createNovember() {
+  createMonthlySheet('November 2026', 30);
+  SpreadsheetApp.getUi().alert('✅ November 2026 sheet created with 30 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createDecember() {
+  createMonthlySheet('December 2026', 31);
+  SpreadsheetApp.getUi().alert('✅ December 2026 sheet created with 31 days!\n\n🔒 Protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nYou\'ll see a warning if you try to edit them.');
+}
+
+function createAllMonths() {
+  createMonthlySheet('January 2026', 31);
+  createMonthlySheet('February 2026', 28);
+  createMonthlySheet('March 2026', 31);
+  createMonthlySheet('April 2026', 30);
+  createMonthlySheet('May 2026', 31);
+  createMonthlySheet('June 2026', 30);
+  createMonthlySheet('July 2026', 31);
+  createMonthlySheet('August 2026', 31);
+  createMonthlySheet('September 2026', 30);
+  createMonthlySheet('October 2026', 31);
+  createMonthlySheet('November 2026', 30);
+  createMonthlySheet('December 2026', 31);
+  
+  SpreadsheetApp.getUi().alert('✅ All 12 months of 2026 created!\n\n🔒 All sheets have protected ranges:\n• Headers & labels\n• Formulas & calculations\n\nCheck the tabs at the bottom to switch between months.');
+}
+
+function onOpen() {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('💰 Budget Tools')
+    .addSubMenu(ui.createMenu('📅 Create Month')
+      .addItem('January 2026 (31 days)', 'createJanuary')
+      .addItem('February 2026 (28 days)', 'createFebruary')
+      .addItem('March 2026 (31 days)', 'createMarch')
+      .addItem('April 2026 (30 days)', 'createApril')
+      .addItem('May 2026 (31 days)', 'createMay')
+      .addItem('June 2026 (30 days)', 'createJune')
+      .addItem('July 2026 (31 days)', 'createJuly')
+      .addItem('August 2026 (31 days)', 'createAugust')
+      .addItem('September 2026 (30 days)', 'createSeptember')
+      .addItem('October 2026 (31 days)', 'createOctober')
+      .addItem('November 2026 (30 days)', 'createNovember')
+      .addItem('December 2026 (31 days)', 'createDecember')
+      .addSeparator()
+      .addItem('🌟 Create All 12 Months', 'createAllMonths'))
+    .addItem('📊 Add Sample Data (Current Sheet)', 'addSampleDataToCurrentSheet')
+    .addItem('🗑️ Clear Sample Data (Current Sheet)', 'clearSampleData')
+    .addItem('📖 How to Use', 'showInstructions')
+    .addToUi();
+}
+
+function addSampleDataToCurrentSheet() {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  
+  // Fill in Monthly Budget
+  sheet.getRange('D5').setValue(55000);
+  
+  // Fill in Fixed Monthly Expenses
+  const sampleExpenses = [10000, 1500, 5000, 800, 500];
+  for (let i = 0; i < sampleExpenses.length; i++) {
+    sheet.getRange(8 + i, 4).setValue(sampleExpenses[i]);
+  }
+  
+  // Get month name from the sheet to determine correct month
+  const monthName = sheet.getName();
+  const monthNum = getMonthNumber(monthName);
+  
+  // Add sample transactions with 2026 dates
+  const sampleTransactions = [
+    [new Date(2026, monthNum, 1), -500, 'Breakfast at cafe'],
+    [new Date(2026, monthNum, 1), 1000, '🎁 Work bonus'],
+    [new Date(2026, monthNum, 1), -300, 'Taxi to office'],
+    [new Date(2026, monthNum, 2), -450, 'Grocery shopping'],
+    [new Date(2026, monthNum, 2), -200, 'Bus fare'],
+    [new Date(2026, monthNum, 3), -350, 'Dinner with friends'],
+    [new Date(2026, monthNum, 3), -800, 'Monthly gym membership'],
+    [new Date(2026, monthNum, 5), -1200, 'Phone bill payment'],
+    [new Date(2026, monthNum, 5), 500, '🎁 Gift from friend'],
+    [new Date(2026, monthNum, 7), -600, 'Shopping - clothes'],
+    [new Date(2026, monthNum, 8), -250, 'Medicine'],
+    [new Date(2026, monthNum, 10), 2000, '💰 Freelance income'],
+    [new Date(2026, monthNum, 12), -900, 'Family dinner'],
+    [new Date(2026, monthNum, 15), -1500, 'Laptop repair']
+  ];
+  
+  sheet.getRange(20, 3, sampleTransactions.length, 3).setValues(sampleTransactions);
+  
+  SpreadsheetApp.getUi().alert(
+    '✅ Sample Data Added to ' + monthName + '!\n\n' +
+    '📊 What was filled in:\n' +
+    '• Monthly Budget: Rs 55,000\n' +
+    '• All Fixed Expenses\n' +
+    '• 14 sample transactions for 2026\n\n' +
+    '🗑️ Use "Clear Sample Data" to reset!'
+  );
+}
+
+function getMonthNumber(monthName) {
+  const months = {
+    'January': 0, 'February': 1, 'March': 2, 'April': 3,
+    'May': 4, 'June': 5, 'July': 6, 'August': 7,
+    'September': 8, 'October': 9, 'November': 10, 'December': 11
+  };
+  
+  for (const month in months) {
+    if (monthName.includes(month)) {
+      return months[month];
+    }
+  }
+  return 0;
+}
+
+function clearSampleData() {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  
+  const ui = SpreadsheetApp.getUi();
+  const response = ui.alert(
+    '🗑️ Clear Sample Data',
+    'This will reset all values to 0 and remove all transactions from ' + sheet.getName() + '.\n\nAre you sure?',
+    ui.ButtonSet.YES_NO
+  );
+  
+  if (response == ui.Button.YES) {
+    sheet.getRange('D5').setValue(0);
+    for (let i = 0; i < 5; i++) {
+      sheet.getRange(8 + i, 4).setValue(0);
+    }
+    sheet.getRange('C20:E1019').clearContent();
+    
+    ui.alert('✅ Sample Data Cleared from ' + sheet.getName() + '!');
+  }
+}
+
+function showInstructions() {
+  SpreadsheetApp.getUi().alert(
+    '📖 HOW TO USE THE 2026 BUDGET TRACKER\n\n' +
+    '1️⃣ CREATE MONTHS:\n' +
+    '   • Go to: 💰 Budget Tools → 📅 Create Month\n' +
+    '   • Select the month you want to create\n' +
+    '   • Or click "Create All 12 Months" for 2026\n\n' +
+    '2️⃣ SWITCH BETWEEN MONTHS:\n' +
+    '   • Click the tabs at the bottom of the sheet\n' +
+    '   • Each month has its own data and calculations\n\n' +
+    '3️⃣ COLOR GUIDE:\n' +
+    '   📊 SUMMARY SECTION:\n' +
+    '   • 🔴 RED - Total Fixed Expenses\n' +
+    '   • 🟢 GREEN - Variable Budget (remaining to spend)\n' +
+    '   • 🟠 ORANGE - Per Day Limit\n' +
+    '   • 🟦 TEAL - Current Balance\n' +
+    '   • 🟣 PURPLE - Days Can Survive\n\n' +
+    '   💳 TRANSACTION COLORS (Auto-change):\n' +
+    '   • 🔴 RED - Overspent day (negative Day Limit)\n' +
+    '   • 🔵 BLUE - Within limit (positive Day Limit)\n\n' +
+    '   ⏳ SURVIVAL DAYS (Auto-change):\n' +
+    '   • 🔴 RED - Critical (less than 7 days left)\n' +
+    '   • 🟡 YELLOW - Warning (7-13 days left)\n' +
+    '   • 🟢 GREEN - Safe (14+ days left)\n\n' +
+    '4️⃣ PROTECTED RANGES:\n' +
+    '   • Headers, labels, and formulas are protected\n' +
+    '   • You\'ll see a warning if you try to edit them\n' +
+    '   • You can still edit if needed (click "Yes")\n\n' +
+    '💡 Tip: Only edit Date, Amount, Note, Monthly Budget, and Fixed Expenses!\n' +
+    '💡 Negative amounts = expenses | Positive = income' +
+    '💡 Keep history for the entire year! '
+  );
+}
