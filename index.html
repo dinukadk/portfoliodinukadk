@@ -1,253 +1,625 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dinuka D. Kirindage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-
-    /* *** Snow-falling effect starts *** */
-    /* #snow-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 9999;
-  } */
-  /*===Snow-falling effect ends..===*/
-
-    /* === LOGO SECTION === */
-    .capitalDlogo {
-      position: absolute;
-      top: 5px;
-      right: 20px;
+    /* =================================================
+       CINEMATIC INTRO OVERLAY
+       ================================================= */
+    #intro-overlay {
+      position: fixed; inset: 0; z-index: 999999;
+      background: #000;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+      transition: opacity 1s 0.2s var(--ease);
+    }
+    #intro-overlay.fade-out { opacity: 0; pointer-events: none; }
+    #intro-overlay img {
       width: 130px;
-      transition: 0.3s;
+      animation: introLogo 1.4s var(--ease) forwards;
+      opacity: 0;
+    }
+    #intro-overlay .intro-line {
+      width: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      animation: introLine 1.2s 0.3s var(--ease) forwards;
+    }
+    @keyframes introLogo {
+      0%   { opacity:0; transform: scale(0.7); filter: brightness(0.3); }
+      60%  { opacity:1; transform: scale(1.08); filter: brightness(1.2) drop-shadow(0 0 20px #ffd700); }
+      100% { opacity:1; transform: scale(1.0);  filter: brightness(1) drop-shadow(0 0 10px rgba(255,215,0,0.5)); }
+    }
+    @keyframes introLine {
+      from { width: 0; } to { width: 160px; }
     }
 
-    .dinukaLogo {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 85px;
-      transition: 0.3s;
+    /* =================================================
+       CANVAS BACKGROUND
+       ================================================= */
+    #hero-canvas {
+      position: fixed; top:0; left:0;
+      width:100vw; height:100vh;
+      pointer-events: none; z-index: 0;
     }
 
-    .capitalDlogo:hover,
-    .dinukaLogo:hover {
-      transform: scale(1.3);
-    }
-
-    @media (max-width: 768px) {
-      .capitalDlogo, .dinukaLogo {
-        width: 65px;
-      }
-
-      .capitalDlogo {
-        top: 7px;
-        width: 90px
-      }
-    }
-
-    /* === HOME SECTION === */
-    .Details {
-      padding: 4rem 2rem;
-      text-align: center;
-      position: relative;
+    /* =================================================
+       HERO SECTION
+       ================================================= */
+    .hero {
       min-height: 100vh;
-      background-color: #0c0c1d;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-h) + 2rem) 2rem 5rem;
+      position: relative; z-index: 1;
     }
 
-    .DetailsH {
-      font-size: 40px;
-      margin: 0.5rem 0;
-      font-weight: 600;
-      cursor: pointer;
-    }
-   
-.DetailsH:hover{
-    color: #adf30b;
-}
-
-    .DinukaPhoto {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      border: 6px solid #ffd700;
-      margin: 2rem auto;
-      object-fit: cover;
-      transition: 0.3s ease-in-out;
+    /* Radial vignette */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none; z-index: -1;
     }
 
-    .DinukaPhoto:hover {
-      transform: scale(1.1);
-    }
+    /* Corner brackets */
+    .corner { position: absolute; width: 50px; height: 50px; opacity: 0.35; }
+    .corner.tl { top:1.2rem; left:1.2rem; border-top:1px solid var(--gold); border-left:1px solid var(--gold); }
+    .corner.tr { top:1.2rem; right:1.2rem; border-top:1px solid var(--gold); border-right:1px solid var(--gold); }
+    .corner.bl { bottom:1.2rem; left:1.2rem; border-bottom:1px solid var(--gold); border-left:1px solid var(--gold); }
+    .corner.br { bottom:1.2rem; right:1.2rem; border-bottom:1px solid var(--gold); border-right:1px solid var(--gold); }
 
-    .name-section h1 {
-      font-size: 28px;
-      margin: 0.2rem 0;
+    /* Logo accents */
+    .hero-badge {
+      position: absolute;
+      filter: drop-shadow(0 0 8px rgba(255,215,0,0.25));
+      transition: var(--t-med) var(--ease);
     }
-
-    .bio {
-      margin-top: 1.5rem;
-      font-size: 17px;
-      line-height: 1.6;
-      color: #dcdcdc;
+    .hero-badge:hover {
+      transform: scale(1.12);
+      filter: drop-shadow(0 0 20px rgba(255,215,0,0.6));
     }
-
-    .caption {
-      font-style: italic;
-      font-size: 19px;
-      opacity: 0.6;
-      margin-top: 1.8rem;
-    }
+    .capitalDlogo { top: calc(var(--nav-h) + 0.8rem); right: 1.8rem; width: 110px; }
+    .dinukaLogo   { top: calc(var(--nav-h) + 0.8rem); left: 1.8rem; width: 72px; }
 
     @media (max-width: 768px) {
-      .DetailsH {
-        font-size: 28px;
-      }
-
-      .DinukaPhoto {
-        width: 200px;
-        height: 200px;
-      }
-
-      .name-section h1 {
-        font-size: 22px;
-      }
-
-      .caption {
-        font-size: 16px;
-      }
+      .capitalDlogo { width: 76px; }
+      .dinukaLogo   { width: 54px; }
     }
+
+    /* =================================================
+       GREETING LINE
+       A single static line showing all three language
+       greetings separated by decorative dividers.
+       ================================================= */
+    .welcome-wrap {
+      font-family: var(--f-mono); font-size: 11px;
+      letter-spacing: 0.32em; color: var(--gold);
+      opacity: 0;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+      animation: fadeIn 0.6s 1.6s forwards;
+      flex-wrap: wrap; /* graceful wrap on very small screens */
+    }
+    /* Each greeting word */
+    .welcome-wrap span { white-space: nowrap; }
+    /* Decorative vertical separator between words */
+    .welcome-divider {
+      color: rgba(255,215,0,0.35);
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    /* =================================================
+       PROFILE PHOTO
+       Enlarged from 230px → 280px for more presence.
+       ================================================= */
+    .photo-wrap {
+      position: relative; width: 280px; height: 280px;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      /* Two animations chained: appear first, then float */
+      animation: photoAppear 1s 1.8s var(--ease) forwards, float 7s 2.8s ease-in-out infinite;
+    }
+    @keyframes photoAppear {
+      from { opacity:0; transform: scale(0.85); }
+      to   { opacity:1; transform: scale(1); }
+    }
+
+    /* Outer decorative ring — rotates clockwise */
+    .ring-outer {
+      position: absolute; inset: -14px; border-radius: 50%;
+      border: 1px solid rgba(255,215,0,0.12);
+      animation: rotateSlow 22s linear infinite;
+    }
+    /* Gold glowing dots at top and bottom of outer ring */
+    .ring-outer::before, .ring-outer::after {
+      content: ''; position: absolute;
+      width: 8px; height: 8px;
+      background: var(--gold); border-radius: 50%;
+      box-shadow: 0 0 10px var(--gold);
+      left: 50%; transform: translateX(-50%);
+    }
+    .ring-outer::before { top: -4px; }
+    .ring-outer::after  { bottom: -4px; }
+
+    /* Inner subtle ring — rotates counter-clockwise */
+    .ring-inner {
+      position: absolute; inset: -5px; border-radius: 50%;
+      border: 1px solid rgba(255,215,0,0.06);
+      animation: rotateSlow 14s linear infinite reverse;
+    }
+
+    /* Profile photo — matches enlarged wrapper size */
+    .DinukaPhoto {
+      width: 280px; height: 280px; border-radius: 50%;
+      border: 2px solid rgba(255,215,0,0.45);
+      object-fit: cover; display: block;
+      box-shadow: 0 0 60px rgba(255,215,0,0.14);
+      animation: pulse 5s ease-in-out infinite;
+      transition: var(--t-med) var(--ease);
+    }
+    .DinukaPhoto:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 90px rgba(255,215,0,0.38);
+      transform: scale(1.04);
+    }
+
+    /* =================================================
+       NAME BLOCK
+       English name slightly reduced (52px → 42px max)
+       to keep proportion with the larger photo.
+       ================================================= */
+    .name-en {
+      font-family: var(--f-display);
+      font-size: clamp(22px,4vw,42px); /* slightly smaller than original 52px */
+      font-weight: 900; letter-spacing: 0.05em;
+      color: var(--text-1); line-height: 1.15;
+      opacity: 0; transform: translateY(22px);
+      animation: fadeInUp 1s 2.2s var(--ease) forwards;
+    }
+    .name-native {
+      font-family: var(--f-body); font-weight: 300;
+      font-size: clamp(13px,2vw,19px);
+      color: var(--text-3); letter-spacing: 0.12em;
+      margin: 0.4rem 0;
+      opacity: 0;
+      animation: fadeInUp 1s 2.5s var(--ease) forwards;
+    }
+
+    /* Gold diamond divider */
+    .divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.7rem; margin: 1rem auto;
+      opacity: 0; animation: fadeIn 1s 2.8s forwards;
+    }
+    .divider-line {
+      height: 1px; width: 70px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .divider-line:last-child {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    .divider-diamond {
+      width: 6px; height: 6px;
+      background: var(--gold); transform: rotate(45deg);
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    /* =================================================
+       ROLE BADGES
+       ================================================= */
+    .badges {
+      display: flex; justify-content: center;
+      flex-wrap: wrap; gap: 0.6rem;
+      margin: 1.4rem 0 1.8rem;
+      opacity: 0; animation: fadeInUp .8s 3s var(--ease) forwards;
+    }
+    .badge {
+      font-family: var(--f-mono); font-size: 10px;
+      letter-spacing: 0.18em; font-weight: 600;
+      padding: 7px 18px; border-radius: var(--r-full);
+      border: 1px solid rgba(255,215,0,0.28);
+      background: var(--g-glow-xs); color: var(--gold);
+      transition: var(--t-fast) var(--ease); white-space: nowrap;
+    }
+    .badge i { margin-right: 5px; font-size: 9px; }
+    .badge:hover {
+      border-color: var(--gold);
+      background: var(--g-glow-md);
+      box-shadow: var(--sh-gold-sm);
+      transform: translateY(-2px);
+    }
+
+    /* =================================================
+       TAGLINE
+       ================================================= */
+    .tagline {
+      font-style: italic; font-size: clamp(13px,1.8vw,17px);
+      color: var(--text-3); max-width: 480px; line-height: 1.8;
+      margin: 0 auto 2.5rem;
+      opacity: 0; animation: fadeIn 1s 3.2s forwards;
+    }
+    .tagline::before { content:'\201C'; color:var(--gold); font-size:1.4em; vertical-align:-0.25em; }
+    .tagline::after  { content:'\201D'; color:var(--gold); font-size:1.4em; vertical-align:-0.25em; }
+
+    /* =================================================
+       CTA BUTTONS
+       ================================================= */
+    .hero-cta {
+      display: flex; gap: 0.9rem; justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0; animation: fadeInUp .8s 3.4s var(--ease) forwards;
+    }
+    .btn-primary {
+      font-family: var(--f-mono); font-size: 10.5px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 13px 32px; border-radius: var(--r-full);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--bg-void); border: none; cursor: pointer;
+      box-shadow: 0 4px 22px rgba(255,215,0,0.3);
+      transition: var(--t-fast) var(--ease); text-decoration: none;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(255,215,0,0.5); }
+    .btn-outline {
+      font-family: var(--f-mono); font-size: 10.5px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 13px 32px; border-radius: var(--r-full);
+      border: 1px solid rgba(255,215,0,0.45);
+      background: transparent; color: var(--gold);
+      cursor: pointer; transition: var(--t-fast) var(--ease);
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: var(--g-glow-sm);
+      transform: translateY(-3px);
+    }
+
+    /* =================================================
+       PAGE NAVIGATION HINT
+       Replaced "SCROLL" with "NAVIGATE" + arrow icons
+       because the site is page-based, not single-scroll.
+       ================================================= */
+    .scroll-hint {
+      position: absolute; bottom: 1.8rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px; opacity: 0;
+      animation: fadeIn 1s 4s forwards;
+    }
+    /* Label text */
+    .scroll-hint span {
+      font-family: var(--f-mono); font-size: 8.5px;
+      letter-spacing: 0.28em; color: var(--text-3);
+    }
+    /* Arrow icon row — two chevrons pointing up and down */
+    .nav-arrows {
+      display: flex; gap: 10px; align-items: center;
+    }
+    .nav-arrows i {
+      color: rgba(255,215,0,0.45);
+      font-size: 12px;
+      animation: arrowBounce 2s ease-in-out infinite;
+    }
+    .nav-arrows i:last-child {
+      animation-delay: 0.3s;
+    }
+    @keyframes arrowBounce {
+      0%,100% { opacity:0.45; transform:translateY(0); }
+      50%     { opacity:1;    transform:translateY(-4px); }
+    }
+
+    /* *** Snow-falling effect (preserved, commented) ***
+    #snow-canvas {
+      position: fixed; top:0; left:0;
+      width:100vw; height:100vh;
+      pointer-events:none; z-index:9999;
+    } */
   </style>
-
-<!-- *** Snow falling effect starts *** -->
-<!-- <canvas id="snow-canvas"></canvas> -->
-<!-- Snow falling effect ends.. -->
 </head>
-
 <body>
 
-  <!-- === NAVIGATION BAR === -->
-  <nav>
-    <a href="#"><img class="Navlogo" src="./Assets/logo.png" alt="Logo"></a>
+  <!-- CINEMATIC INTRO -->
+  <div id="intro-overlay">
+    <img src="./Assets/logo.png" alt="Logo">
+    <div class="intro-line"></div>
+  </div>
 
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"  id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- Particle Canvas -->
+  <canvas id="hero-canvas"></canvas>
+
+  <!-- Snow canvas (kept for future activation)
+  <canvas id="snow-canvas"></canvas> -->
+
+  <!-- ========== NAV ========== -->
+  <nav id="navbar">
+    <a href="#"><img class="Navlogo" src="./Assets/logo.png" alt="Logo"></a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#"><i class="fas fa-home"></i> HOME</a></li>
+      <li><a href="#"           class="active"><i class="fas fa-home"></i> HOME</a></li>
       <li><a href="aboutme.html"><i class="fas fa-user"></i> ABOUT ME</a></li>
       <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
       <li><button class="download_Resume"><i class="fas fa-download"></i> Resume</button></li>
     </ul>
-
-    <!-- Hamburger Icon -->
-    <div class="hamburger" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
     </div>
   </nav>
 
-  <!-- === HOME SECTION === -->
-  <section class="Details">
-    <img class="capitalDlogo" src="./Assets/C.D_TP_logo.png" alt="CD Logo">
-    <img class="dinukaLogo" src="./Assets/T.ln_hq.png" alt="Dinuka Logo">
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-    <div class="DetailsH">Welcome</div>
-    <div class="DetailsH">ආයුබෝවන්</div>
-    <div class="DetailsH">வணக்கம்</div>
+    <!-- Logo badges -->
+    <img class="hero-badge capitalDlogo" src="./Assets/C.D_TP_logo.png" alt="CD Logo">
+    <img class="hero-badge dinukaLogo"   src="./Assets/T.ln_hq.png"     alt="Dinuka Logo">
 
-    <img class="DinukaPhoto" src="./Assets/About Section Photo.jpg" alt="Dinuka">
-
-    <div class="name-section">
-      <h1>Dinuka D. Kirindage</h1>
-      <h1>දිනුක කිරින්දගේ</h1>
-      <h1>தினுக கிரிந்தகே</h1>
+    <!-- ==============================================
+         GREETING LINE
+         Static one-liner: all three language greetings
+         displayed together, separated by gold dividers.
+         ============================================== -->
+    <div class="welcome-wrap" id="welcomeWrap">
+      <span>WELCOME</span>
+      <span class="welcome-divider">||</span>
+      <span>ආයුබෝවන්</span>
+      <span class="welcome-divider">||</span>
+      <span>வணக்கம்</span>
     </div>
 
-    <div class="bio">
-      <p><strong>IT Undergraduate at SLIIT</strong> &nbsp;||&nbsp;
-        <strong>Political Enthusiast & Active Party Member</strong> &nbsp;||&nbsp;
-        <strong>Business Owner & Investor</strong>
-      </p>
+    <!-- Photo -->
+    <div class="photo-wrap">
+      <div class="ring-outer"></div>
+      <div class="ring-inner"></div>
+      <img class="DinukaPhoto" src="./Assets/About Section Photo.jpg" alt="Dinuka">
     </div>
 
-    <p class="caption">“Passionate about CODING and Debugging the UNIVERSE.”</p>
+    <!-- Name -->
+    <div class="name-en">Dinuka D. Kirindage</div>
+    <div class="name-native">දිනුක කිරින්දගේ &nbsp;·&nbsp; தினுக கிரிந்தகே</div>
+
+    <!-- Divider -->
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Badges -->
+    <div class="badges">
+      <div class="badge"><i class="fas fa-microchip"></i>IT Undergraduate · SLIIT</div>
+      <div class="badge"><i class="fas fa-landmark"></i>Political Activist</div>
+      <div class="badge"><i class="fas fa-chart-line"></i>Business Owner</div>
+    </div>
+
+    <!-- Tagline -->
+    <p class="tagline">Passionate about CODING and Debugging the UNIVERSE.</p>
+
+    <!-- CTAs -->
+    <div class="hero-cta">
+      <a href="aboutme.html" class="btn-primary"><i class="fas fa-compass"></i>&nbsp; Explore My World</a>
+      <a href="contact.html" class="btn-outline"><i class="fas fa-paper-plane"></i>&nbsp; Get In Touch</a>
+    </div>
+
+    <!-- ==============================================
+         NAVIGATION HINT
+         Replaces old "SCROLL" — site is page-based
+         so we show "NAVIGATE" with chevron arrows.
+         ============================================== -->
+    <div class="scroll-hint">
+      <span>NAVIGATE</span>
+      <div class="nav-arrows">
+        <i class="fas fa-chevron-left"></i>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </div>
   </section>
 
-  <!-- === JS for Toggle === -->
   <script>
+    /* ==================================================
+       CINEMATIC INTRO
+       ================================================== */
+    const overlay = document.getElementById('intro-overlay');
+    setTimeout(() => {
+      overlay.classList.add('fade-out');
+      setTimeout(() => overlay.remove(), 1300);
+    }, 1600);
+
+    /* ==================================================
+       CUSTOM CURSOR
+       ================================================== */
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top  = my + 'px';
+    });
+    (function tick() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a,button,.badge').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+    });
+
+    /* ==================================================
+       NAV SCROLL EFFECT
+       ================================================== */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ==================================================
+       HAMBURGER
+       ================================================== */
     function toggleMenu() {
-      const navLinks = document.getElementById("nav-links");
-      navLinks.classList.toggle("active");
+      document.getElementById('nav-links').classList.toggle('active');
+      document.getElementById('hamburger').classList.toggle('active');
     }
 
-// *** Snow falling effect starts ***
-  //   document.addEventListener("DOMContentLoaded", function () {
-  //   const canvas = document.getElementById("snow-canvas");
-  //   const ctx = canvas.getContext("2d");
+    /* ==================================================
+       GREETING LINE
+       No JavaScript needed — all three greetings are
+       now shown statically in a single line via CSS.
+       (Old cycling animation removed)
+       ================================================== */
 
-  //   // Set canvas to cover the entire page *** COMMENTED LINE ***
-  //   function setCanvasSize() {
-  //     canvas.width = window.innerWidth;
-  //     canvas.height = window.innerHeight;
-  //   }
-  //   setCanvasSize();
-  //   window.addEventListener("resize", setCanvasSize);
+    /* ==================================================
+       PARTICLE CONSTELLATION CANVAS
+       ================================================== */
+    const canvas = document.getElementById('hero-canvas');
+    const ctx    = canvas.getContext('2d');
 
-  //   const snowflakes = [];
-  //   const snowflakeShapes = ["❄", "✶", "✻", "✼", "✺"]; // Snowflake symbols
+    function resizeCanvas() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-  //   function createSnowflakes() {
-  //     const total = 200; // Adjust the number of snowflakes
-  //     for (let i = 0; i < total; i++) {
-  //       snowflakes.push({
-  //         x: Math.random() * canvas.width,
-  //         y: Math.random() * canvas.height,
-  //         size: Math.random() * 24 + 8, // Snowflake size
-  //         speed: Math.random() * 1 + 0.5, // Snowflake speed
-  //         shape: snowflakeShapes[Math.floor(Math.random() * snowflakeShapes.length)],
-  //         opacity: Math.random() * 0.8 + 0.2,
-  //       });
-  //     }
-  //   }
+    const PARTS = 130;
+    const parts = Array.from({ length: PARTS }, () => ({
+      x:  Math.random() * canvas.width,
+      y:  Math.random() * canvas.height,
+      r:  Math.random() * 1.4 + 0.2,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.28,
+      op: Math.random() * 0.5 + 0.1,
+      gold: Math.random() < 0.14
+    }));
 
-  //   function drawSnowflakes() {
-  //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  //     snowflakes.forEach((flake) => {
-  //       ctx.globalAlpha = flake.opacity;
-  //       ctx.font = `${flake.size}px Arial`;
-  //       ctx.fillStyle = "white";
-  //       ctx.fillText(flake.shape, flake.x, flake.y);
-  //     });
-  //     updateSnowflakes();
-  //   }
+    let pmx = canvas.width / 2, pmy = canvas.height / 2;
+    document.addEventListener('mousemove', e => { pmx = e.clientX; pmy = e.clientY; });
 
-  //   function updateSnowflakes() {
-  //     snowflakes.forEach((flake) => {
-  //       flake.y += flake.speed;
-  //       if (flake.y > canvas.height) {
-  //         flake.y = 0;
-  //         flake.x = Math.random() * canvas.width;
-  //       }
-  //     });
-  //   }
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  //   function animateSnowflakes() {
-  //     drawSnowflakes();
-  //     requestAnimationFrame(animateSnowflakes);
-  //   }
+      parts.forEach(p => {
+        const dx = pmx - p.x, dy = pmy - p.y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < 220) { p.vx += dx * 0.000028; p.vy += dy * 0.000028; }
+        p.vx *= 0.99; p.vy *= 0.99;
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width)  p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
 
-  //   createSnowflakes();
-  //   animateSnowflakes();
-  // });
-// Snow falling effect ends...
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        if (p.gold) {
+          ctx.fillStyle = `rgba(255,215,0,${p.op * 1.6})`;
+          ctx.shadowBlur = 7; ctx.shadowColor = 'rgba(255,215,0,0.5)';
+        } else {
+          ctx.fillStyle = `rgba(160,160,220,${p.op * 0.35})`;
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill(); ctx.shadowBlur = 0;
+      });
+
+      /* Connection lines */
+      for (let i = 0; i < parts.length; i++) {
+        for (let j = i + 1; j < parts.length; j++) {
+          const dx = parts[i].x - parts[j].x;
+          const dy = parts[i].y - parts[j].y;
+          const d  = Math.sqrt(dx*dx + dy*dy);
+          if (d < 105) {
+            ctx.beginPath();
+            ctx.moveTo(parts[i].x, parts[i].y);
+            ctx.lineTo(parts[j].x, parts[j].y);
+            ctx.strokeStyle = `rgba(255,215,0,${(1 - d/105) * 0.07})`;
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    /* ==================================================
+       SNOW FALLING EFFECT — Preserved, ready to activate
+       ==================================================
+    document.addEventListener("DOMContentLoaded", function () {
+      const snowCanvas = document.getElementById("snow-canvas");
+      const sCtx = snowCanvas.getContext("2d");
+
+      function setCanvasSize() {
+        snowCanvas.width  = window.innerWidth;
+        snowCanvas.height = window.innerHeight;
+      }
+      setCanvasSize();
+      window.addEventListener("resize", setCanvasSize);
+
+      const snowflakes = [];
+      const snowflakeShapes = ["❄","✶","✻","✼","✺"];
+
+      function createSnowflakes() {
+        for (let i = 0; i < 200; i++) {
+          snowflakes.push({
+            x: Math.random() * snowCanvas.width,
+            y: Math.random() * snowCanvas.height,
+            size:  Math.random() * 24 + 8,
+            speed: Math.random() * 1 + 0.5,
+            shape: snowflakeShapes[Math.floor(Math.random() * snowflakeShapes.length)],
+            opacity: Math.random() * 0.8 + 0.2,
+          });
+        }
+      }
+
+      function drawSnowflakes() {
+        sCtx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+        snowflakes.forEach(flake => {
+          sCtx.globalAlpha = flake.opacity;
+          sCtx.font        = `${flake.size}px Arial`;
+          sCtx.fillStyle   = "white";
+          sCtx.fillText(flake.shape, flake.x, flake.y);
+        });
+        updateSnowflakes();
+      }
+
+      function updateSnowflakes() {
+        snowflakes.forEach(flake => {
+          flake.y += flake.speed;
+          if (flake.y > snowCanvas.height) {
+            flake.y = 0;
+            flake.x = Math.random() * snowCanvas.width;
+          }
+        });
+      }
+
+      function animateSnowflakes() {
+        drawSnowflakes();
+        requestAnimationFrame(animateSnowflakes);
+      }
+      createSnowflakes();
+      animateSnowflakes();
+    });
+    */
   </script>
 </body>
 </html>
-
-
