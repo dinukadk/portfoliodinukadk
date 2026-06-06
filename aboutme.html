@@ -1,890 +1,779 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me - Dinuka D. Kirindage</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
-  <!-- Font Awesome (Correct version) -->
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me — Dinuka D. Kirindage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    /*=== Smooth Scrolling ===*/
-    html {
-      scroll-behavior: smooth;
+    html { scroll-behavior: smooth; }
+
+    /* =================================================
+       PAGE BANNER
+       ================================================= */
+    .page-banner {
+      padding: calc(var(--nav-h) + 5.5rem) 2rem 5rem;
+      text-align: center; position: relative; overflow: hidden;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,215,0,0.04) 0%, transparent 70%),
+                  linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-dark) 100%);
+    }
+    .page-banner::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.18;
+    }
+    .page-banner h1 {
+      font-family: var(--f-display);
+      font-size: clamp(34px,6vw,62px);
+      font-weight: 900; letter-spacing: 0.05em;
+      color: var(--text-1); margin: 0.5rem 0 1rem;
+    }
+    .page-banner h1 span { color: var(--gold); }
+    .page-banner p {
+      font-size: 15px; color: var(--text-3);
+      max-width: 420px; margin: 0 auto; line-height: 1.8;
     }
 
-    /*=== About section ===*/
-    .about-section {
-      padding: 4rem 2rem;
-      background-color: #121232;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Shimmer effect only for sections below About Me */
-    .about-section:not(.aboutMe-section)::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, transparent, #ffd700, transparent);
-      animation: shimmer 3s infinite;
-    }
-
-    @keyframes shimmer {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-
-    .about-section h2 {
-      font-size: 36px;
-      color: #ffd700;
-      margin-bottom: 2rem;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
+    /* =================================================
+       ABOUT INTRO (split layout)
+       ================================================= */
+    .about-section { position: relative; overflow: hidden; }
     .aboutMe-section {
-      background-color: #0c0c1d; 
+      background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-mid) 100%);
+      padding: 5rem 2rem 3rem;
     }
+    .about-section:not(.aboutMe-section) {
+      padding: 5rem 2rem;
+    }
+    .about-section:not(.aboutMe-section)::before {
+      content: ''; position: absolute; top:0; left:0; right:0; height:1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      animation: shimmerLine 4s ease-in-out infinite;
+      opacity: 0.22;
+    }
+
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+
+    /* Intro grid */
+    .about-intro {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem; align-items: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    @media (max-width: 820px) {
+      .about-intro { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+      .about-info-list li { justify-content: center; }
+      .about-info-col .section-label { justify-content: center; }
+    }
+
+    /* Photo frame */
+    .photo-frame {
+      position: relative; width: 256px; height: 256px;
+      margin: 0 auto;
+    }
+    .photo-frame::before {
+      content: ''; position: absolute; inset: -14px; border-radius: 50%;
+      border: 1px solid rgba(255,215,0,0.1);
+      animation: rotateSlow 28s linear infinite;
+    }
+    .photo-frame::after {
+      content: ''; position: absolute; inset: -6px; border-radius: 50%;
+      border: 1px solid rgba(255,215,0,0.18);
+      animation: rotateSlow 18s linear infinite reverse;
+    }
+    .photo-dots {
+      position: absolute; inset: -14px; border-radius: 50%;
+      animation: rotateSlow 28s linear infinite;
+    }
+    .photo-dots::before, .photo-dots::after {
+      content: ''; position: absolute;
+      width: 7px; height: 7px; background: var(--gold); border-radius: 50%;
+      box-shadow: 0 0 10px var(--gold), 0 0 20px rgba(255,215,0,0.4);
+      left: 50%; transform: translateX(-50%);
+    }
+    .photo-dots::before { top: -3px; }
+    .photo-dots::after  { bottom: -3px; }
 
     .DinukaPhoto {
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      border: 6px solid #ffd700;
-      margin: 2rem auto 1rem auto;
-      display: block;
-      transition: 0.3s ease-in-out;
+      width: 256px; height: 256px; border-radius: 50%;
+      border: 2px solid rgba(255,215,0,0.45);
+      object-fit: cover; display: block;
+      transition: var(--t-med) var(--ease);
+      box-shadow: 0 0 50px rgba(255,215,0,0.1);
+    }
+    .DinukaPhoto:hover { border-color: var(--gold); box-shadow: 0 0 80px rgba(255,215,0,0.3); }
+    .photo-tag {
+      font-family: var(--f-mono); font-size: 9.5px;
+      letter-spacing: 0.22em; color: var(--text-3);
+      text-align: center; margin-top: 1.2rem;
     }
 
-    .DinukaPhoto:hover {
-      transform: scale(1.05);
+    /* Info column */
+    .about-info-col .section-label { justify-content: flex-start; margin-bottom: 0.6rem; }
+    .about-info-col h2 {
+      font-family: var(--f-display);
+      font-size: clamp(20px,3.5vw,34px);
+      font-weight: 900; color: var(--text-1);
+      line-height: 1.2; margin-bottom: 0.4rem;
     }
-
-    .personal-info p {
-      font-size: 18px;
-      margin: 0.5rem 0;
+    .about-info-col h2 span { color: var(--gold); }
+    .sub-title {
+      font-family: var(--f-mono); font-size: 10px;
+      letter-spacing: 0.22em; color: var(--gold);
+      opacity: 0.65; margin-bottom: 1.6rem;
     }
-
-    .about-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem;
+    .about-info-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin: 1.5rem 0; }
+    .about-info-list li {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      font-size: 14.5px; color: var(--text-2);
     }
-
-    .about-card {
-      background-color: #1e1e3f;
-      border: 2px solid #ffd700;
-      padding: 2rem;
-      border-radius: 16px;
-      width: 280px;
-      transition: 0.3s;
+    .about-info-list li i { color: var(--gold); font-size: 11px; margin-top: 3px; flex-shrink: 0; }
+    .about-info-list strong { color: var(--text-1); margin-right: 0.25rem; }
+    .about-desc {
+      font-size: 15px; color: var(--text-2); line-height: 1.9; margin: 1.4rem 0 1.8rem;
     }
-
-    .about-card:hover {
-      background-color: #ffd700;
-      color: black;
-      transform: translateY(-10px);
-      cursor: pointer;
-    }
-
-    .about-card h3 { margin-bottom: 0.5rem; }
-
-    @media (max-width: 768px) {
-      .about-cards {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    .section-block {
-      padding: 5rem 2rem;
-      background: linear-gradient(135deg, #0c0c1d 0%, #121232 100%);
-      color: #fff;
-      text-align: center;
-      position: relative;
-    }
-
-    .cert-btn {
-      display: inline-block;
-      padding: 12px 28px;
-      border: 2px solid #ffd700;
-      border-radius: 30px;
-      background-color: transparent;
-      color: #ffd700;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      margin: 1rem 0.5rem;
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--f-mono); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 11px 26px; border-radius: var(--r-full);
+      border: 1px solid var(--gold); background: transparent;
+      color: var(--gold); cursor: pointer;
+      transition: var(--t-fast) var(--ease);
       text-decoration: none;
-      position: relative;
-      overflow: hidden;
+    }
+    .btn-gold:hover { background: var(--gold); color: var(--bg-void); box-shadow: var(--sh-gold-sm); }
+
+    /* =================================================
+       PILLAR CARDS
+       ================================================= */
+    .pillars {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1.4rem; max-width: var(--max-w);
+      margin: 4rem auto 0; padding: 0 0 2rem;
+    }
+    @media (max-width: 860px) { .pillars { grid-template-columns: 1fr; max-width: 420px; } }
+
+    .pillar-card {
+      background: linear-gradient(145deg, var(--bg-card), var(--bg-hover));
+      border: var(--b-xs); border-radius: var(--r-lg);
+      padding: 2rem 1.6rem; text-align: center;
+      text-decoration: none; color: var(--text-1);
+      transition: all var(--t-med) var(--ease);
+      position: relative; overflow: hidden;
+    }
+    .pillar-card::before {
+      content: ''; position: absolute; bottom:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0; transition: opacity var(--t-med) var(--ease);
+    }
+    .pillar-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--g-glow-xs), transparent);
+      opacity: 0; transition: opacity var(--t-med) var(--ease);
+    }
+    .pillar-card:hover::before, .pillar-card:hover::after { opacity: 1; }
+    .pillar-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255,215,0,0.28);
+      box-shadow: var(--sh-gold-lg);
+    }
+    .pillar-icon {
+      width: 58px; height: 58px; border-radius: 50%;
+      border: 1px solid rgba(255,215,0,0.28);
+      background: var(--g-glow-xs);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem; font-size: 20px; color: var(--gold);
+      transition: var(--t-med) var(--ease); position: relative; z-index: 1;
+    }
+    .pillar-card:hover .pillar-icon { border-color: var(--gold); background: var(--g-glow-md); box-shadow: var(--sh-gold-sm); }
+    .pillar-card h3 {
+      font-family: var(--f-heading); font-size: 17px; font-weight: 600;
+      color: var(--gold); margin-bottom: 0.5rem; position: relative; z-index: 1;
+    }
+    .pillar-card p { font-size: 13.5px; color: var(--text-3); position: relative; z-index: 1; line-height: 1.65; }
+
+    /* =================================================
+       SECTION HEADINGS
+       ================================================= */
+    .section-heading { text-align: center; margin-bottom: 3rem; }
+    .section-heading h2 {
+      font-family: var(--f-heading);
+      font-size: clamp(24px,3.5vw,42px);
+      font-weight: 700; color: var(--gold);
+      letter-spacing: 0.06em; margin-top: 0.7rem;
+    }
+    .section-heading .desc {
+      max-width: 700px; margin: 1.5rem auto 0;
+      font-size: 15.5px; line-height: 1.9; color: var(--text-2);
     }
 
-    .cert-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: #ffd700;
-      transition: left 0.3s ease;
-      z-index: -1;
+    .projects-sub { text-align: center; margin: 3.5rem 0 1.5rem; }
+    .projects-sub h3 {
+      font-family: var(--f-heading); font-size: clamp(18px,2.5vw,28px);
+      color: var(--text-1); margin-top: 0.6rem;
     }
+    .projects-sub p { font-size: 14px; color: var(--text-3); margin-top: 0.6rem; }
 
-    .cert-btn:hover::before {
-      left: 0;
-    }
-
-    .cert-btn:hover {
-      color: #0c0c1d;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-    }
-
-    /* Back to Top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-      color: #0c0c1d;
-      border: none;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
-      transition: all 0.3s ease;
-      z-index: 1000;
-    }
-
-    .back-to-top:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
-    }
-
-    .back-to-top.show {
-      display: flex;
-      animation: fadeInUp 0.5s ease;
-    }
-
-    .project-placeholder {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
+    .cards-grid {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 1.5rem;
       margin-top: 3rem;
     }
-
-    .placeholder-box {
-      width: 300px;
-      height: 200px;
-      background-color: #1e1e3f;
-      border: 2px dashed #ffd700;
-      border-radius: 12px;
+    /* =================================================
+       ENLARGED PERSON CARD IMAGES
+       The .person-card img width is 100% of its 272px
+       card container by default. We add an override for
+       the Political Activist and Entrepreneur sections
+       so images are displayed at a larger fixed height,
+       giving those sections more visual impact.
+       ================================================= */
+    #politicsSection .person-card img,
+    #businessSection .person-card img {
+      height: 220px;       /* taller than the default auto */
+      object-fit: cover;   /* crop-to-fill rather than squeeze */
+      border-radius: var(--r-md);
     }
 
-    /* Project Cards Enhancement */
-    .project-card {
-      background: linear-gradient(135deg, #1e1e3f 0%, #2a2a5f 100%);
-      border: 2px solid #ffd700;
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      margin: 2rem auto;
-      transition: all 0.4s ease;
-      opacity: 0;
-      transform: translateY(30px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .project-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
-      border-color: #fff;
-    }
-
-    .project-images-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-bottom: 1.5rem;
-    }
-
-    .project-images-grid img {
-      width: 100%;
-      border-radius: 12px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .project-images-grid img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-    }
-
-    /* Mobile optimization */
-    @media (max-width: 600px) {
-      .project-images-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .project-card {
-        padding: 1.5rem;
-        margin: 1.5rem auto;
-      }
-    }
-
-    /* Scroll Animation Classes */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Politician/Business Card Enhancements */
-    .person-card {
-      background: linear-gradient(135deg, #1e1e3f 0%, #2a2a5f 100%);
-      border: 2px solid #ffd700;
-      border-radius: 20px;
-      width: 280px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .person-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .person-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
-      border-color: #fff;
-    }
-
-    .person-card img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      transition: transform 0.3s ease;
-    }
-
-    .person-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .person-card h3 {
-      margin-top: 1rem;
-      color: #ffd700;
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .person-card p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #e0e0e0;
-      margin-top: 0.5rem;
-    }
-
-
-</style>
+  </style>
 </head>
-
 <body>
-  <!-- === NAVIGATION BAR === -->
-  <nav>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"  id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- ========== NAV ========== -->
+  <nav id="navbar">
     <a href="index.html"><img class="Navlogo" src="./Assets/logo.png" alt="Logo"></a>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
-      <li><a href="aboutme.html"><i class="fas fa-user"></i> ABOUT ME</a></li>
+      <li><a href="aboutme.html" class="active"><i class="fas fa-user"></i> ABOUT ME</a></li>
       <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
       <li><button class="download_Resume"><i class="fas fa-download"></i> Resume</button></li>
     </ul>
-    <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </nav>
 
-  <!-- === ABOUT ME SECTION === -->
+  <!-- ========== PAGE BANNER ========== -->
+  <div class="page-banner">
+    <div class="section-label">PORTFOLIO</div>
+    <h1>About <span>Me</span></h1>
+    <p>Technology. Politics. Business.<br>Three pillars of one singular vision.</p>
+  </div>
+
+  <!-- ========== ABOUT ME INTRO ========== -->
   <section class="about-section aboutMe-section" id="aboutMe">
-    <h2>About Me</h2>
-    <img src="./Assets/About Section Photo 1.png" alt="Dinuka" class="DinukaPhoto">
-    <div class="personal-info">
-      <p><strong>Full Name:</strong> Dinuka D. Kirindage</p>
-      <p><strong>Date of Birth:</strong> April 10, 2003</p>
-      <p><strong>Address:</strong> Galle, Sri Lanka</p>
-    </div>
+    <div class="section-inner">
+      <div class="about-intro">
 
-    <div class="about-cards">
-      <a href="#techSection" class="about-card">
-        <h3>Me as a Tech Enthusiast</h3>
-        <p>IT Undergraduate at SLIIT</p>
-      </a>
-      <a href="#politicsSection" class="about-card">
-        <h3>Me as a Political Activist</h3>
-        <p>Active Party Member</p>
-      </a>
-      <a href="#businessSection" class="about-card">
-        <h3>Me as an Entrepreneur</h3>
-        <p>Business Owner & Investor</p>
-      </a>
+        <!-- Photo -->
+        <div class="reveal-left">
+          <div class="photo-frame">
+            <div class="photo-dots"></div>
+            <img src="./Assets/About Section Photo 1.png" alt="Dinuka" class="DinukaPhoto">
+          </div>
+          <div class="photo-tag">DINUKA D. KIRINDAGE</div>
+        </div>
+
+          <!-- ==============================================
+               WHO I AM — Info Column
+               sub-title changed: ACTIVIST → POLITICAL ACTIVIST
+               ============================================== -->
+          <div class="about-info-col reveal-right">
+            <div class="section-label" style="justify-content:flex-start;">WHO I AM</div>
+            <h2>Dinuka D. <span>Kirindage</span></h2>
+            <!-- "ACTIVIST" was too vague; updated to POLITICAL ACTIVIST for clarity -->
+            <div class="sub-title">IT UNDERGRADUATE · ENTREPRENEUR · POLITICAL ACTIVIST</div>
+
+            <ul class="about-info-list">
+              <li><i class="fas fa-user-circle"></i><span><strong>Full Name:</strong> Dinuka D. Kirindage</span></li>
+              <!-- Birthday: day removed per user request — month + year is sufficient -->
+              <li><i class="fas fa-calendar-alt"></i><span><strong>Date of Birth:</strong> April 2003</span></li>
+              <li><i class="fas fa-map-marker-alt"></i><span><strong>Location:</strong> Galle, Sri Lanka</span></li>
+              <li><i class="fas fa-graduation-cap"></i><span><strong>Degree:</strong> BSc. IT at SLIIT (Ongoing)</span></li>
+            </ul>
+
+            <p class="about-desc">
+              A young leader shaped by three powerful forces — Technology, Business, and Politics.
+              My life is defined by curiosity, strategic thinking, and an alpha drive to create lasting impact:
+              coded into systems, built into ventures, and expressed through political will.
+            </p>
+            <a href="contact.html" class="btn-gold"><i class="fas fa-paper-plane"></i> Connect With Me</a>
+          </div>
+        </div>
+
+      <!-- Pillar navigation cards -->
+      <div class="pillars">
+        <a href="#techSection"     class="pillar-card reveal">
+          <div class="pillar-icon"><i class="fas fa-microchip"></i></div>
+          <h3>Technology</h3>
+          <p>IT Undergraduate at SLIIT building projects across UI/UX, Full-Stack & Data Analytics.</p>
+        </a>
+        <a href="#politicsSection" class="pillar-card reveal">
+          <div class="pillar-icon"><i class="fas fa-landmark"></i></div>
+          <h3>Politics</h3>
+          <p>Active party member. Youth Executive. Driven by a vision for a better Sri Lanka.</p>
+        </a>
+        <a href="#businessSection" class="pillar-card reveal">
+          <div class="pillar-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Business</h3>
+          <p>Managing a bookshop. Building CapitalD. Eyeing a multi-sector business group.</p>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- === TECH SECTION === -->
+
+  <!-- =====================================================================
+       TECH SECTION
+       ===================================================================== -->
   <section id="techSection" class="about-section">
-    <h2>Me as a Tech Enthusiast</h2>
-    <p class="fade-in" style="max-width: 800px; margin: 1.5rem auto; font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-      I studied Information & Communication Technology for my G.C.E Advanced Level examination.
-      Now, I'm currently pursuing my Bachelor's Degree in IT at SLIIT. I'm also taking online courses 
-      many of which I've completed and earned certificates for. These certifications are already listed on my LinkedIn profile.
-    </p>
-
-    <a href="https://www.linkedin.com/in/dinukadk/details/certifications/" target="_blank" class="cert-btn">
-      View My Certifications
-    </a>
-
-    <br><br>
-    <hr style="margin: 3rem auto; width: 80%; border: none; height: 2px; background: linear-gradient(90deg, transparent, #ffd700, transparent);">
-    <br>
-
-    <h3 class="fade-in" style="color:#ffd700; font-size: 28px; font-weight: 700; margin: 2rem 0 1rem 0; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);">Projects Showcase</h3>
-    <p class="fade-in" style="color: #e0e0e0; font-size: 16px; margin-bottom: 2rem;">I'm currently working on some exciting projects. Once completed, I'll upload them here with images and details.</p>
-
-    <!-- HungerFix -->
-
-        <div class="project-card" style="max-width: 500px;">
-          
-        <a href="YOUR_YOUTUBE_LINK" target="_blank">
-          <img src="./Assets/HungerFix.png" alt="Project Thumbnail" style="width: 100%; border-radius: 12px; transition: transform 0.3s ease;">
-        </a>
-
-        <h2 style="margin-top: 1rem; color: #ffd700; font-size: 24px;">HungerFix</h2>
-        <p style="font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-          HungerFix is my very first Figma project, built as part of the Mobile Application Development module during my 2nd year at SLIIT.<br><br>
-          The app offers a clean, intuitive interface to connect users with delicious homemade meals. It was designed with a focus on user flow, mobile-first design, and visual consistency.<br><br>
-          This project helped me practice core UI/UX skills such as wireframing, prototyping, and applying usability heuristics.<br><br>
-          Want to see it in action? Check out the demo below on LinkedIn or explore it directly on Figma.<br><br>
+    <div class="section-inner">
+      <div class="section-heading">
+        <div class="section-label">PILLAR ONE</div>
+        <h2>Me as a Tech Enthusiast</h2>
+        <p class="desc fade-in">
+          I studied Information &amp; Communication Technology for my G.C.E Advanced Level examination.
+          Now pursuing a Bachelor's Degree in IT at SLIIT. I actively take online courses —
+          many of which I've completed and certified, all listed on my LinkedIn profile.
         </p>
-
-        <a href="https://www.figma.com/proto/Kv8lBDBfrZ7cZuq644CxCx/Hunger_Fix?node-id=28-189&starting-point-node-id=6%3A3&t=gsjgafLE2D8xnznO-1" target="_blank" class="cert-btn">
-          View on Figma
-        </a>
-        <a href="https://www.linkedin.com/posts/dinukadk_figma-mobileappdevelopment-figmadesign-activity-7352096505215807488-YYck?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELhA4EBO3YXnutrX_4krLaNtKOQRZ8k1EU" target="_blank" class="cert-btn">
-          View LinkedIn Post
-        </a>
-      </div>
-
-
-      <!-- === Rover P6 UI/UX Redesign Project === -->
-<div class="project-card" style="max-width: 1000px;">
-
-  <!-- Project Images Grid (2x2) -->
-  <div class="project-images-grid">
-      <img src="./Assets/HCI_Project_1.png" alt="Rover P6 Screen 1"> 
-      <img src="./Assets/HCI_Project_2.png" alt="Rover P6 Screen 2"> 
-      <img src="./Assets/HCI_Project_3.png" alt="Rover P6 Screen 3">
-  </div>
-
-  <h2 style="margin-top: 1rem; color: #ffd700; font-size: 28px;">Rover P6 – UI/UX Redesign</h2>
-
-  <p style="font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-    As part of our HCI module, my team redesigned the e-commerce experience for the 
-    Rover P6 Classic Car Parts website. <br><br>
-    I personally handled three critical user flows: <br>
-    🔐 Login Experience &nbsp; &nbsp; <br>🛒 Shopping Cart &nbsp; &nbsp; <br>💳 Checkout / Payment<br><br>
-    The redesign focuses on usability, clarity, and reducing friction while 
-    maintaining the heritage identity of the brand.<br><br>
-    A short demo video is available on LinkedIn, and the full redesign is available on Figma.
-  </p>
-
-  <!-- Buttons -->
-  <a href="https://www.figma.com/design/2WgiTz20dH0o0j6uUntzJR/HCI-Project-share--3Y1S-?node-id=0-1&t=b9MlYY41yqonPJ7O-1" 
-     target="_blank" class="cert-btn">
-    View on Figma
-  </a>
-
-  <a href="https://www.linkedin.com/posts/dinukadk_uxdesign-hci-ecommercedesign-activity-7398740206742536192-GRoB?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELhA4EBO3YXnutrX_4krLaNtKOQRZ8k1EU" 
-     target="_blank" class="cert-btn">
-    View LinkedIn Post
-  </a>
-
-</div>
-
-        <!-- === UniLifeHub (ITPM-3Y2S) === -->
-      <div class="project-card" style="max-width: 1000px;">
-        <div class="project-images-grid">
-          <img src="./Assets/UniLifeHub1.png" alt="Project Screen 1">
-          <img src="./Assets/UniLifeHub2.png" alt="Project Screen 2"> 
-          <img src="./Assets/UniLifeHub3.png" alt="Project Screen 3">
+        <div style="margin-top:2rem;">
+          <a href="https://www.linkedin.com/in/dinukadk/details/certifications/" target="_blank" class="cert-btn">
+            <i class="fab fa-linkedin"></i> View My Certifications
+          </a>
         </div>
-
-        <h2 style="margin-top: 1rem; color: #ffd700; font-size: 28px;">UniLifeHub – Task & Countdown Manager</h2>
-        <p style="font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-          Developed as a collaborative MERN stack web application for the Information Technology Project Management (ITPM) module during my 3rd year. While the team built the core architecture, I focused strictly on completing the specific requirements for my designated module, taking full ownership of the task management ecosystem. The goal was to provide an intuitive, interactive experience for users to categorize and track their workload.<br><br>
-          I personally handled the end-to-end development of the following critical features:<br>
-          📊 Dynamic Dashboard: Real-time overview of overall progress and category-specific completion rates. &nbsp; &nbsp; <br>🗂️ Kanban-Style Categories: Interactive 'To Do', 'In Progress', and 'Completed' sections with seamless drag-and-drop. &nbsp; &nbsp; <br>⏳ Countdown Manager: Integrated deadline tracking with automated past-date validation.<br><br>
-          A detailed walkthrough of my individual module is available on LinkedIn, and the full source code can be explored on GitHub.
-        </p>
-
-        <a href="https://www.linkedin.com/posts/dinukadk_mernstack-webdevelopment-reactjs-activity-7468642836184322048-6URS?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELhA4EBO3YXnutrX_4krLaNtKOQRZ8k1EU" target="_blank" class="cert-btn">
-          View LinkedIn Post
-        </a>
-        <a href="https://github.com/dinukadk/UniLifeHub_Public_Share.git" target="_blank" class="cert-btn">
-          View on GitHub
-        </a>
       </div>
 
-        <!-- === DS&A lab 6 YouTube Project with PDF Download === -->
-      <div class="project-card" style="max-width: 500px;">
+      <hr class="gold-hr">
+
+      <div class="projects-sub">
+        <div class="section-label">SHOWCASE</div>
+        <h3>Projects</h3>
+        <p>A selection of academic and personal projects — each one a step forward.</p>
+      </div>
+
+      <!-- ─── HungerFix Project Card ─── -->
+      <!-- Single-image project: Figma prototype for Mobile App Development module -->
+      <div class="project-card" style="max-width:520px;">
+        <!-- Clickable thumbnail links to YouTube channel -->
+        <a href="YOUR_YOUTUBE_LINK" target="_blank">
+          <img src="./Assets/HungerFix.png" alt="HungerFix" style="width:100%;border-radius:var(--r-md);transition:transform .3s ease;position:relative;z-index:1;">
+        </a>
+        <h2 style="margin-top:1.2rem;color:var(--gold);font-family:var(--f-heading);font-size:24px;position:relative;z-index:1;">HungerFix</h2>
+        <p style="font-size:15.5px;line-height:1.9;color:var(--text-2);margin:1rem 0;position:relative;z-index:1;">
+          My very first Figma project, built for the Mobile Application Development module during my 2nd year at SLIIT.
+          The app connects users with homemade meals through a clean, intuitive interface — designed with focus on mobile-first
+          layout and visual consistency.<br><br>
+          Core skills practised: wireframing, prototyping, and usability heuristics.
+        </p>
+        <!-- External links — open in new tab -->
+        <a href="https://www.figma.com/proto/Kv8lBDBfrZ7cZuq644CxCx/Hunger_Fix?node-id=28-189&starting-point-node-id=6%3A3&t=gsjgafLE2D8xnznO-1" target="_blank" class="cert-btn"><i class="fab fa-figma"></i> View on Figma</a>
+        <a href="https://www.linkedin.com/posts/dinukadk_figma-mobileappdevelopment-figmadesign-activity-7352096505215807488-YYck?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELhA4EBO3YXnutrX_4krLaNtKOQRZ8k1EU" target="_blank" class="cert-btn"><i class="fab fa-linkedin"></i> LinkedIn Post</a>
+      </div>
+
+      <!-- ─── Rover P6 UI/UX Redesign Project Card ─── -->
+      <!-- Multi-image project: HCI module redesign of Rover P6 e-commerce site -->
+      <div class="project-card" style="max-width:960px;">
+        <div class="project-images-grid" style="position:relative;z-index:1;">
+          <img src="./Assets/HCI_Project_1.png" alt="Rover P6 Screen 1">
+          <img src="./Assets/HCI_Project_2.png" alt="Rover P6 Screen 2">
+          <img src="./Assets/HCI_Project_3.png" alt="Rover P6 Screen 3">
+        </div>
+        <h2 style="margin-top:1.2rem;color:var(--gold);font-family:var(--f-heading);font-size:26px;position:relative;z-index:1;">Rover P6 — UI/UX Redesign</h2>
+        <p style="font-size:15.5px;line-height:1.9;color:var(--text-2);margin:1rem 0;position:relative;z-index:1;">
+          As part of our HCI module, my team redesigned the e-commerce experience for the Rover P6 Classic Car Parts website.<br><br>
+          I personally handled three critical user flows:<br>
+          🔐 Login Experience &nbsp;&nbsp; 🛒 Shopping Cart &nbsp;&nbsp; 💳 Checkout / Payment<br><br>
+          The redesign focuses on usability, clarity, and reducing friction while maintaining the heritage identity of the brand.
+        </p>
+        <!-- External links -->
+        <a href="https://www.figma.com/design/2WgiTz20dH0o0j6uUntzJR/HCI-Project-share--3Y1S-?node-id=0-1&t=b9MlYY41yqonPJ7O-1" target="_blank" class="cert-btn"><i class="fab fa-figma"></i> View on Figma</a>
+        <a href="https://www.linkedin.com/posts/dinukadk_uxdesign-hci-ecommercedesign-activity-7398740206742536192-GRoB?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELhA4EBO3YXnutrX_4krLaNtKOQRZ8k1EU" target="_blank" class="cert-btn"><i class="fab fa-linkedin"></i> LinkedIn Post</a>
+      </div>
+
+      <!-- ─── UniLifeHub MERN Stack Project Card ─── -->
+      <!-- Multi-image project: ITPM module — task & countdown manager -->
+      <div class="project-card" style="max-width:960px;">
+        <div class="project-images-grid" style="position:relative;z-index:1;">
+          <img src="./Assets/UniLifeHub1.png" alt="UniLifeHub Screen 1">
+          <img src="./Assets/UniLifeHub2.png" alt="UniLifeHub Screen 2">
+          <img src="./Assets/UniLifeHub3.png" alt="UniLifeHub Screen 3">
+        </div>
+        <h2 style="margin-top:1.2rem;color:var(--gold);font-family:var(--f-heading);font-size:26px;position:relative;z-index:1;">UniLifeHub — Task &amp; Countdown Manager</h2>
+        <p style="font-size:15.5px;line-height:1.9;color:var(--text-2);margin:1rem 0;position:relative;z-index:1;">
+          A collaborative MERN stack web application for the ITPM module during my 3rd year. I took full ownership of the task management ecosystem.<br><br>
+          📊 Dynamic Dashboard: real-time progress &amp; category completion rates. &nbsp;&nbsp;
+          🗂️ Kanban Categories: drag-and-drop To Do / In Progress / Completed boards. &nbsp;&nbsp;
+          ⏳ Countdown Manager: deadline tracking with past-date validation.<br><br>
+          Full walkthrough on LinkedIn · Source code on GitHub.
+        </p>
+        <!-- External links -->
+        <a href="https://www.linkedin.com/posts/dinukadk_mernstack-webdevelopment-reactjs-activity-7468642836184322048-6URS?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELhA4EBO3YXnutrX_4krLaNtKOQRZ8k1EU" target="_blank" class="cert-btn"><i class="fab fa-linkedin"></i> LinkedIn Post</a>
+        <a href="https://github.com/dinukadk/UniLifeHub_Public_Share.git" target="_blank" class="cert-btn"><i class="fab fa-github"></i> View on GitHub</a>
+      </div>
+
+      <!-- ─── PowerBI Documentation Project Card ─── -->
+      <!-- Single-image project: Supporting PDFs for YouTube tutorial series -->
+      <div class="project-card" style="max-width:520px;">
+        <!-- Thumbnail links to YouTube channel -->
         <a href="https://youtube.com/@dinuka_d._kirindage?si=6p4XRVA8f6YEhzhH" target="_blank">
-          <img src="./Assets/PowerBI_Post.png" alt="YouTube Project Thumbnail" style="width: 100%; border-radius: 12px; transition: transform 0.3s ease;">
+          <img src="./Assets/PowerBI_Post.png" alt="PowerBI" style="width:100%;border-radius:var(--r-md);transition:transform .3s ease;position:relative;z-index:1;">
         </a>
-
-        <h2 style="margin-top: 1rem; color: #ffd700; font-size: 24px;">DOCUMENTS for PowerBI videos</h2>
-        <p style="font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-          This project was explained in my YouTube video. You can download the supporting PDF file below.<br><br>
+        <h2 style="margin-top:1.2rem;color:var(--gold);font-family:var(--f-heading);font-size:24px;position:relative;z-index:1;">Documents for PowerBI Videos</h2>
+        <p style="font-size:15.5px;line-height:1.9;color:var(--text-2);margin:1rem 0;position:relative;z-index:1;">
+          Supporting documents for my PowerBI tutorial series on YouTube. Download the PDFs below to follow along.
         </p>
-
-        <!-- Button to Download PDF -->
-        <a href="./Assets/Lab6PDF.pdf" download class="cert-btn">
-          📄 Download PDF for LAB 6
-        </a>
-      
-        <!-- Button to Download PDF -->
-        <a href="./Assets/LabSheet_8_Act1.pdf" download class="cert-btn">
-          📄 Download PDF for LAB 8
-        </a>
+        <!-- Direct PDF downloads (no new tab needed for downloads) -->
+        <a href="./Assets/Lab6PDF.pdf" download class="cert-btn">📄 Download PDF — LAB 6</a>
+        <a href="./Assets/LabSheet_8_Act1.pdf" download class="cert-btn">📄 Download PDF — LAB 8</a>
       </div>
 
 
-<!-- **********************************************************************************
-                  TEMPLATE 1: Single Image Project
-********************************************************************************** 
-      <div class="project-card" style="max-width: 500px;">
+<!-- ============================================================
+     TEMPLATE 1 — Single Image Project
+     ============================================================
+      <div class="project-card" style="max-width: 520px;">
         <a href="YOUR_YOUTUBE_LINK" target="_blank">
-          <img src="./Assets/HungerFix.png" alt="Project Thumbnail" style="width: 100%; border-radius: 12px; transition: transform 0.3s ease;">
+          <img src="./Assets/PROJECT_IMAGE.png" alt="Project Thumbnail"
+               style="width:100%;border-radius:var(--r-md);transition:transform .3s ease;position:relative;z-index:1;">
         </a>
-
-        <h2 style="margin-top: 1rem; color: #ffd700; font-size: 24px;">Project Name</h2>
-        <p style="font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-          This project was explained in my YouTube video. You can download the supporting PDF file below.<br><br>
+        <h2 style="margin-top:1.2rem;color:var(--gold);font-family:var(--f-heading);font-size:24px;position:relative;z-index:1;">Project Name</h2>
+        <p style="font-size:15.5px;line-height:1.9;color:var(--text-2);margin:1rem 0;position:relative;z-index:1;">
+          Project description here. What is it? What tech did you use? What did you learn?
         </p>
-
-        <a href="YOUR_FIGMA_LINK" target="_blank" class="cert-btn">
-          View on Figma
-        </a>
-        <a href="YOUR_LINKEDIN_LINK" target="_blank" class="cert-btn">
-          View LinkedIn Post
-        </a>
-        <a href="YOUR_GITHUB_LINK" target="_blank" class="cert-btn">
-          View on GitHub
-        </a>
-        <a href="./Assets/YOUR_PDF.pdf" download class="cert-btn">
-          📄 Download PDF
-        </a>
-        <a href="YOUR_YOUTUBE_LINK" target="_blank" class="cert-btn">
-          Watch on YouTube
-        </a>
+        <a href="YOUR_FIGMA_LINK"    target="_blank" class="cert-btn"><i class="fab fa-figma"></i>    View on Figma</a>
+        <a href="YOUR_LINKEDIN_LINK" target="_blank" class="cert-btn"><i class="fab fa-linkedin"></i> LinkedIn Post</a>
+        <a href="YOUR_GITHUB_LINK"   target="_blank" class="cert-btn"><i class="fab fa-github"></i>   View on GitHub</a>
+        <a href="./Assets/YOUR_PDF.pdf" download     class="cert-btn">📄 Download PDF</a>
+        <a href="YOUR_YOUTUBE_LINK"  target="_blank" class="cert-btn"><i class="fab fa-youtube"></i>  Watch on YouTube</a>
       </div>
-********************************************************************************** -->
+     ============================================================ -->
 
 
-<!-- **********************************************************************************
-                  TEMPLATE 2: Multiple Images Grid Project (2x2 or 2x3)
-**********************************************************************************
-      <div class="project-card" style="max-width: 1000px;">
-        <div class="project-images-grid">
+<!-- ============================================================
+     TEMPLATE 2 — Multiple Images Grid (2×2 or 2×3)
+     ============================================================
+      <div class="project-card" style="max-width: 960px;">
+        <div class="project-images-grid" style="position:relative;z-index:1;">
           <img src="./Assets/PROJECT_IMAGE_1.png" alt="Project Screen 1">
-          <img src="./Assets/PROJECT_IMAGE_2.png" alt="Project Screen 2"> 
+          <img src="./Assets/PROJECT_IMAGE_2.png" alt="Project Screen 2">
           <img src="./Assets/PROJECT_IMAGE_3.png" alt="Project Screen 3">
-          <img src="./Assets/PROJECT_IMAGE_4.png" alt="Project Screen 4"> 
+          <img src="./Assets/PROJECT_IMAGE_4.png" alt="Project Screen 4">
         </div>
-
-        <h2 style="margin-top: 1rem; color: #ffd700; font-size: 28px;">Project Name</h2>
-        <p style="font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-          Project description goes here. Explain what the project is about, what technologies you used, 
-          and what you learned from it.<br><br>
-          Key features or highlights:<br>
-          ✨ Feature 1 &nbsp; &nbsp; <br>🚀 Feature 2 &nbsp; &nbsp; <br>💡 Feature 3<br><br>
-          Additional details can be added here.
+        <h2 style="margin-top:1.2rem;color:var(--gold);font-family:var(--f-heading);font-size:26px;position:relative;z-index:1;">Project Name</h2>
+        <p style="font-size:15.5px;line-height:1.9;color:var(--text-2);margin:1rem 0;position:relative;z-index:1;">
+          Project description here. What is it? What tech? What did you learn?<br><br>
+          Key highlights:<br>
+          ✨ Feature 1 &nbsp;&nbsp; 🚀 Feature 2 &nbsp;&nbsp; 💡 Feature 3
         </p>
-
-        <a href="YOUR_FIGMA_LINK" target="_blank" class="cert-btn">
-          View on Figma
-        </a>
-        <a href="YOUR_LINKEDIN_LINK" target="_blank" class="cert-btn">
-          View LinkedIn Post
-        </a>
-        <a href="YOUR_GITHUB_LINK" target="_blank" class="cert-btn">
-          View on GitHub
-        </a>
-        <a href="./Assets/YOUR_PDF.pdf" download class="cert-btn">
-          📄 Download PDF
-        </a>
-        <a href="YOUR_YOUTUBE_LINK" target="_blank" class="cert-btn">
-          Watch on YouTube
-        </a>
+        <a href="YOUR_FIGMA_LINK"    target="_blank" class="cert-btn"><i class="fab fa-figma"></i>    View on Figma</a>
+        <a href="YOUR_LINKEDIN_LINK" target="_blank" class="cert-btn"><i class="fab fa-linkedin"></i> LinkedIn Post</a>
+        <a href="YOUR_GITHUB_LINK"   target="_blank" class="cert-btn"><i class="fab fa-github"></i>   View on GitHub</a>
+        <a href="./Assets/YOUR_PDF.pdf" download     class="cert-btn">📄 Download PDF</a>
+        <a href="YOUR_YOUTUBE_LINK"  target="_blank" class="cert-btn"><i class="fab fa-youtube"></i>  Watch on YouTube</a>
       </div>
-********************************************************************************** -->
+     ============================================================ -->
 
 
-<!-- **********************************************************************************
-                  TEMPLATE 3: Simple Project Card (No Images)
-********************************************************************************** 
-      <div class="project-card" style="max-width: 600px;">
-        <h2 style="margin-top: 1rem; color: #ffd700; font-size: 28px;">Project Name</h2>
-        <p style="font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-          Project description goes here. Explain what the project is about, what technologies you used, 
-          and what you learned from it.<br><br>
-          Technologies used: HTML, CSS, JavaScript, React, etc.<br><br>
-        <a href="YOUR_FIGMA_LINK" target="_blank" class="cert-btn">
-          View on Figma
-        </a>
-        <a href="YOUR_LINKEDIN_LINK" target="_blank" class="cert-btn">
-          View LinkedIn Post
-        </a>
-        <a href="YOUR_GITHUB_LINK" target="_blank" class="cert-btn">
-          View on GitHub
-        </a>
-        <a href="./Assets/YOUR_PDF.pdf" download class="cert-btn">
-          📄 Download PDF
-        </a>
-        <a href="YOUR_YOUTUBE_LINK" target="_blank" class="cert-btn">
-          Watch on YouTube
-        </a> 
+<!-- ============================================================
+     TEMPLATE 3 — Simple Card (No Images)
+     ============================================================
+      <div class="project-card" style="max-width: 620px;">
+        <h2 style="margin-top:1.2rem;color:var(--gold);font-family:var(--f-heading);font-size:26px;position:relative;z-index:1;">Project Name</h2>
+        <p style="font-size:15.5px;line-height:1.9;color:var(--text-2);margin:1rem 0;position:relative;z-index:1;">
+          Project description here. Technologies used: HTML, CSS, JavaScript, React, Node.js, etc.
         </p>
+        <a href="YOUR_FIGMA_LINK"    target="_blank" class="cert-btn"><i class="fab fa-figma"></i>    View on Figma</a>
+        <a href="YOUR_LINKEDIN_LINK" target="_blank" class="cert-btn"><i class="fab fa-linkedin"></i> LinkedIn Post</a>
+        <a href="YOUR_GITHUB_LINK"   target="_blank" class="cert-btn"><i class="fab fa-github"></i>   View on GitHub</a>
+        <a href="./Assets/YOUR_PDF.pdf" download     class="cert-btn">📄 Download PDF</a>
+        <a href="YOUR_YOUTUBE_LINK"  target="_blank" class="cert-btn"><i class="fab fa-youtube"></i>  Watch on YouTube</a>
       </div>
-********************************************************************************** -->
+     ============================================================ -->
+
     </div>
   </section>
 
-  <!-- === POLITICAL JOURNEY SECTION === -->
-<section id="politicsSection" class="about-section">
 
-  <!-- Section Title -->
-  <h2>Me as a Political Activist</h2>
+  <!-- =====================================================================
+       POLITICS SECTION
+       ===================================================================== -->
+  <section id="politicsSection" class="about-section">
+    <div class="section-inner">
+      <div class="section-heading">
+        <div class="section-label">PILLAR TWO</div>
+        <h2>Me as a Political Activist</h2>
+        <p class="desc fade-in">
+          I have been interested in politics since my school days — a dedicated young man who aspires for a better social system.
+          I started party politics with Mr. Dilith Jayaweera in his then Mawbima Janatha Party, and in a short time
+          was elected as a Youth Executive Committee member. I have met and discussed with politicians across the ideological spectrum,
+          always seeking wisdom and broader perspective.
+        </p>
+      </div>
 
-  <!-- Intro Paragraph -->
-<p class="fade-in" style="max-width: 800px; margin: 1.5rem auto; font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-  I have been interested in politics since my school days and am a dedicated young man who aspires for a better social system.
-  I started party politics systematically with Mr. Dilith Jayaweera in his then Mawbima Janatha Party. In a short time,
-  I was elected as a Youth Executive Committee member. While actively carrying out political activities in that party,
-  I also met and discussed with mature politicians with both similar and contrasting ideologies, always seeking wisdom
-  and advice from them. Below are some memorable moments captured with political leaders, activists, and from special political events.
-</p>
+      <div class="cards-grid">
 
+        <!-- POLITICIAN CARD 1 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Dilith-Politics.jpg" alt="Dilith Jayaweera">
+          <h3>Dilith Susantha Jayaweera</h3>
+          <p>Founder of Mawbima Janatha Party. Presidential candidate in 2024. Current MP via National List. Media mogul, lawyer &amp; political leader.</p>
+        </div>
 
-  <!-- === PHOTO GALLERY WRAPPER === -->
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
+        <!-- POLITICIAN CARD 2 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Manusha.jpeg" alt="Manusha Nanayakkara">
+          <h3>Manusha Nanayakkara</h3>
+          <p>Minister of Labour &amp; Foreign Employment (2022). Currently serving as Advisor to the President on Labour &amp; Employment affairs.</p>
+        </div>
 
-    <!-- === POLITICIAN CARD 1 === -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Dilith-Politics.jpg" alt="Dilith Jayaweera">
-      <h3>Dilith Susantha Jayaweera</h3>
-      <p>
-        Founder of Mawbima Janatha Party. Presidential candidate in 2024. Current MP via National List. Media mogul, lawyer & political leader.
-      </p>
+        <!-- POLITICIAN CARD 3 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Udaya.jpg" alt="Udaya Gammanpila">
+          <h3>Udaya Prabath Gammanpila</h3>
+          <p>Leader of Pivithuru Hela Urumaya. Former Minister of Energy, Parliamentarian for Colombo District, and advocate of nationalist values.</p>
+        </div>
+
+        <!-- POLITICIAN CARD 4 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Channa.jpg" alt="Channa Jayasumana">
+          <h3>Channa Jayasumana</h3>
+          <p>Former State Minister of Pharmaceuticals &amp; Cabinet Minister of Health during Sri Lanka's reform period post-2022.</p>
+        </div>
+
+        <!-- POLITICIAN CARD 5 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Wimal.jpg" alt="Wimal Weerawansa">
+          <h3>Wimal Weerawansa</h3>
+          <p>Leader of the National Freedom Front (NFF). Held cabinet roles in industries, construction, housing, and SME development.</p>
+        </div>
+
+        <!-- POLITICIAN CARD 6 -->
+        <div class="person-card">
+          <img src="./Assets/SeelarathanaThero.jpeg" alt="Seelarathana Thero">
+          <h3>Baththaramulle Seelarathana Thero</h3>
+          <p>Leader of Janasetha Peramuna. Presidential candidate in 2020 &amp; 2024, advocating for "One Country, One Nation, One Law".</p>
+        </div>
+
+        <!-- POLITICIAN CARD 7 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Namal.jpg" alt="Namal Rajapaksa">
+          <h3>Lakshman Namal Rajapaksa</h3>
+          <p>Appointed National Organizer of the SLPP in 2024. Youngest presidential candidate in the same year — placed 4th with 2.57%. Former Minister of Youth &amp; Sports (2020–2022).</p>
+        </div>
+
+        <!-- POLITICIAN CARD 8 -->
+        <div class="person-card">
+          <img src="./Assets/Ms.Namini.jpeg" alt="Namini Panditha">
+          <h3>Namini Panditha</h3>
+          <p>Founder of Liberal Youth Movement &amp; Future for Her. Attorney at Law of the Supreme Court of Sri Lanka. LLM from Staffordshire University, UK. COO of Liberal Youth Movement.</p>
+        </div>
+
+        <!-- POLITICIAN CARD 9 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Sagara.jpeg" alt="Sagara Kaliyawasam">
+          <h3>Sagara Kaliyawasam</h3>
+          <p>General Secretary of Sri Lanka Podujana Peramuna (SLPP). National List MP following the 2020 parliamentary election. Attorney at Law with extensive experience in political administration.</p>
+        </div>
+
+        <!-- POLITICIAN CARD 10 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Sagara2.jpeg" alt="Sagara Kaliyawasam Certificate">
+          <img src="./Assets/Mr.Sagara3.jpeg" alt="Sagara Kaliyawasam Certificate 2" style="margin-top:0.5rem;">
+          <h3>Sagara Kaliyawasam</h3>
+          <p>Received a certificate from Mr. Sagara Ratnayaka at the International Human Rights Program — 21.09.2025 at BMICH.</p>
+        </div>
+
+        <!-- POLITICIAN CARD 11 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Duminda.jpeg" alt="Duminda Dissanayake">
+          <h3>Duminda Dissanayake</h3>
+          <p>Former Cabinet Minister of Agriculture, Irrigation &amp; Education Services. First entered Parliament in 2000 as the youngest elected MP at age 21. Multiple terms representing Anuradhapura District.</p>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <!-- === POLITICIAN CARD 2 === -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Manusha.jpeg" alt="Manusha Nanayakkara">
-      <h3>Manusha Nanayakkara</h3>
-      <p>
-        Minister of Labour & Foreign Employment (2022). Currently serving as Advisor to the President on Labour & Employment affairs.
-      </p>
+
+  <!-- =====================================================================
+       ENTREPRENEUR SECTION
+       ===================================================================== -->
+  <section id="businessSection" class="about-section">
+    <div class="section-inner">
+      <div class="section-heading">
+        <div class="section-label">PILLAR THREE</div>
+        <h2>Me as an Entrepreneur</h2>
+        <p class="desc fade-in">
+          Currently managing my father's book shop, while building a brand called
+          <strong style="color:var(--gold);">CapitalD</strong>.
+          My goal is to expand this into the
+          <strong style="color:var(--gold);">CapitalD Business Group</strong> —
+          spanning tech, media, innovation, and education.
+          Several ventures are already in the pipeline, to be launched once I complete my IT degree.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+
+        <!-- BUSINESS CARD 1 -->
+        <div class="person-card">
+          <img src="./Assets/DinukaBookShop.jpg" alt="Dinuka Book Shop">
+          <h3>Dinuka Book Shop</h3>
+          <p>My father's legacy — a trusted local bookshop I currently manage. It taught me business ethics and customer service from the ground up.</p>
+        </div>
+
+        <!-- BUSINESS CARD 2 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Dilith-Business.jpg" alt="Dilith Jayaweera">
+          <h3>Dilith Jayaweera</h3>
+          <p>A diversified business giant owning or controlling 40+ companies across media, finance, and hospitality. A personal inspiration in both politics and enterprise.</p>
+        </div>
+
+        <!-- BUSINESS CARD 3 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Dhanushka.jpg" alt="Dhanushka Fernando">
+          <h3>Dhanushka Fernando</h3>
+          <p>Award-winning entrepreneur behind Finez — a premium interior &amp; furniture brand focused on innovation, sustainability, and local craftsmanship.</p>
+        </div>
+
+        <!-- BUSINESS CARD 4 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Dhanika.jpeg" alt="Dhanika Perera">
+          <h3>Dhanika Perera</h3>
+          <p>Founder of Bhasha Lanka and creator of Helakuru. A key figure in tech entrepreneurship and digital localization in Sri Lanka.</p>
+        </div>
+
+        <!-- BUSINESS CARD 5 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Dilshan.jpeg" alt="Dilshan Abeygunawardana">
+          <h3>Dilshan Abeygunawardana</h3>
+          <p>Co-founder of Olee AI and global top NFT freelancer. His journey inspires my vision to combine tech, business, and creativity.</p>
+        </div>
+
+        <!-- BUSINESS CARD 6 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Dulith.jpeg" alt="Dulith Herath">
+          <h3>Dulith Herath</h3>
+          <p>Serial entrepreneur behind Kapruka.com and Java Lounge. A symbol of innovation in Sri Lanka's e-commerce and logistics sectors.</p>
+        </div>
+
+        <!-- BUSINESS CARD 7 -->
+        <div class="person-card">
+          <img src="./Assets/Mr.Chandana.jpeg" alt="Chandana Sooriyabandara">
+          <h3>Chandana Sooriyabandara</h3>
+          <p>Veteran media executive and current Presidential Media Advisor. His entrepreneurial mindset reshaped Sri Lankan journalism and media ethics.</p>
+        </div>
+
+        <!-- BUSINESS CARD 8 -->
+        <div class="person-card">
+          <img src="./Assets/Dr.Ranil.jpg" alt="Ranil Sugathadasa">
+          <h3>Ranil Sugathadasa <br>(CEO Coach)</h3>
+          <p>Author, motivational speaker, and senior lecturer at the University of Moratuwa. Renowned CEO coach — trained 1.2 million+ individuals and 1000+ organizations globally.</p>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <!-- === POLITICIAN CARD 3 === -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Udaya.jpg" alt="Udaya Gammanpila">
-      <h3>Udaya Prabath Gammanpila</h3>
-      <p>
-        Leader of Pivithuru Hela Urumaya. Former Minister of Energy, Parliamentarian for Colombo District, and advocate of nationalist values.
-      </p>
-    </div>
-
-    <!-- === POLITICIAN CARD 4 === -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Channa.jpg" alt="Channa Jayasumana">
-      <h3>Channa Jayasumana</h3>
-      <p>
-        Former State Minister of Pharmaceuticals & Cabinet Minister of Health during Sri Lanka's reform period post-2022.
-      </p>
-    </div>
-
-    <!-- === POLITICIAN CARD 5 === -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Wimal.jpg" alt="Wimal Weerawansa">
-      <h3>Wimal Weerawansa</h3>
-      <p>
-        Leader of the National Freedom Front (NFF). Held cabinet roles in industries, construction, housing, and SME development.
-      </p>
-    </div>
-
-    <!-- === POLITICIAN CARD 6 === -->
-    <div class="person-card">
-      <img src="./Assets/SeelarathanaThero.jpeg" alt="Seelarathana Thero">
-      <h3>Baththaramulle Seelarathana Thero</h3>
-      <p>
-        Leader of Janasetha Peramuna. Presidential candidate in 2020 & 2024, advocating for "One Country, One Nation, One Law".
-      </p>
-    </div>
-
-  <!-- === POLITICIAN CARD 7 === -->
-  <div class="person-card">
-    <img src="./Assets/Mr.Namal.jpg" alt="Namal Rajapaksa">
-    <h3>Lakshman Namal Rajapaksa</h3>
-    <p>
-    Appointed National Organizer of the SLPP in 2024 and ran as the youngest presidential candidate in the same year. Placed 4th with 2.57% of the vote, Former Minister of Youth & Sports (2020–2022). 
-  </p>
-</div>
-
-  <!-- === POLITICIAN CARD 8 === -->
-  <div class="person-card">
-    <img src="./Assets/Ms.Namini.jpeg" alt="Namini Panditha">
-    <h3>Namini Panditha</h3>
-    <p>
-    Founder of Liberal Youth Movement & Future for Her. <br>Attorney at Law of the Supreme Court of Sri Lanka with LLB (Hons) from University of Colombo and LLM from Staffordshire University, UK. <br>Chief Operating Officer of Liberal Youth Movement, a political think tank promoting liberal values and inclusive politics.  </p>
-</div>
-
-  <!-- === POLITICIAN CARD 9 === -->
-  <div class="person-card">
-    <img src="./Assets/Mr.Sagara.jpeg" alt="Sagara Kaliyawasam">
-    <h3>Sagara Kaliyawasam</h3>
-    <p>
-    General Secretary of Sri Lanka Podujana Peramuna (SLPP). National List MP in Parliament of Sri Lanka following the 2020 parliamentary election. Attorney at Law with extensive experience in political administration and party organization.
-  </div>
-
-  <!-- === POLITICIAN CARD 10 === -->
-  <div class="person-card">
-    <img src="./Assets/Mr.Sagara2.jpeg" alt="Sagara Kaliyawasam3">
-    <img src="./Assets/Mr.Sagara3.jpeg" alt="Sagara Kaliyawasam2" style="margin-top: 0.5rem;">
-    <h3>Sagara Kaliyawasam</h3>
-    <p>
-    Received a certificate from Mr. Sagara Ratnayaka at the International Human Rights Program held on 21.09.2025 at BMICH.
-  </div>
-   
-    <!-- === POLITICIAN CARD 11 === -->
-  <div class="person-card">
-      <img src="./Assets/Mr.Duminda.jpeg" alt="Duminda Dissanayake">
-      <h3>Duminda Dissanayake</h3>
-      <p>
-        Former Cabinet Minister of Agriculture, Irrigation, and Education Services. First entered Parliament in 2000, becoming the youngest person to be elected at the age of 21. Served as Vice-President of the SLFP Youth Wing and has represented the Anuradhapura District in multiple terms.
-      </p>
-   </div>
-
-  </div>
-
-</section>
-
-
-  <!-- === ENTREPRENEUR SECTION === -->
-<section id="businessSection" class="about-section">
-
-  <!-- Section Heading -->
-  <h2>Me as an Entrepreneur</h2>
-
-  <!-- Intro Paragraph -->
-  <p class="fade-in" style="max-width: 800px; margin: 1.5rem auto; font-size: 18px; line-height: 1.8; color: #e0e0e0;">
-    Currently, I manage my father's book shop, while also building a brand called <strong style="color: #ffd700;">"CapitalD"</strong>. 
-    My goal is to expand this into a full-scale business group in the near future something like <strong style="color: #ffd700;">CapitalD Business Group</strong>  
-    spanning tech, media, innovation, and education. I'm already shaping up several business ideas and plan to execute them once I complete my IT degree.
-  </p>
-
-  <!-- === BUSINESS PHOTO SHOWCASE === -->
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
-
-    <!-- 1. Father's Bookshop -->
-    <div class="person-card">
-      <img src="./Assets/DinukaBookShop.jpg" alt="Dinuka Book Shop">
-      <h3>Dinuka Book Shop</h3>
-      <p>
-        My father's legacy a trusted local bookshop that I currently manage. It taught me business ethics and customer service from the ground up.
-      </p>
-    </div>
-
-    <!-- 2. Dilith Jayaweera (as Business Tycoon) -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Dilith-Business.jpg" alt="Dilith Jayaweera">
-      <h3>Dilith Jayaweera</h3>
-      <p>
-        A diversified business giant who owns or controls 40+ companies across media, finance, hospitality, and more. A personal inspiration in both politics and enterprise.
-      </p>
-    </div>
-
-    <!-- 3. Dhanushka Fernando (Finez) -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Dhanushka.jpg" alt="Dhanushka Fernando">
-      <h3>Dhanushka Fernando</h3>
-      <p>
-        Award-winning entrepreneur behind Finez a premium interior & furniture brand focused on innovation, sustainability, and local craftsmanship.
-      </p>
-    </div>
-
-    <!-- 4. Dhanika Perera (Helakuru) -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Dhanika.jpeg" alt="Dhanika Perera">
-      <h3>Dhanika Perera</h3>
-      <p>
-        Founder of Bhasha Lanka and creator of Helakuru. A key figure in tech entrepreneurship and digital localization in Sri Lanka.
-      </p>
-    </div>
-
-    <!-- 5. Dilshan Abeygunawardana (Olee AI) -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Dilshan.jpeg" alt="Dilshan Abeygunawardana">
-      <h3>Dilshan Abeygunawardana</h3>
-      <p>
-        Co-founder of Olee AI and global top NFT freelancer. His journey inspires my vision to combine tech, business, and creativity.
-      </p>
-    </div>
-
-    <!-- 6. Dulith Herath (Kapruka) -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Dulith.jpeg" alt="Dulith Herath">
-      <h3>Dulith Herath</h3>
-      <p>
-        Serial entrepreneur behind Kapruka.com and Java Lounge. A symbol of innovation in Sri Lanka's e-commerce and logistics sectors.
-      </p>
-    </div>
-
-    <!-- 7. Chandana Sooriyabandara (Media Entrepreneur) -->
-    <div class="person-card">
-      <img src="./Assets/Mr.Chandana.jpeg" alt="Chandana Sooriyabandara">
-      <h3>Chandana Sooriyabandara</h3>
-      <p>
-        Veteran media executive and current Presidential Media Advisor. His entrepreneurial mindset reshaped Sri Lankan journalism and media ethics.
-      </p>
-    </div>
-
-    <!-- 8. Ranil Sugathadasa (CEO Coach) -->
-    <div class="person-card">
-      <img src="./Assets/Dr.Ranil.jpg" alt="Ranil Sugathadasa">
-      <h3>Ranil Sugathadasa <br> (CEO Coach)</h3>
-      <p>
-        Author, motivational speaker, and senior lecturer at the University of Moratuwa, Dr. Ranil Sugathadasa is a renowned CEO coach who has trained over 1.2 
-        million individuals and helped 1000+ organizations locally and internationally.      </p>
-    </div>
-
-  </div>
-
-</section>
-
-  <!-- Back to Top Button -->
+  <!-- Back to Top -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
     <i class="fas fa-arrow-up"></i>
   </button>
 
+  <!-- ========== SCRIPTS ========== -->
   <script>
-    function toggleMenu() {
-      const navLinks = document.getElementById("nav-links");
-      navLinks.classList.toggle("active");
+    /* =================================================
+       CUSTOM CURSOR
+       Two-part cursor: a sharp gold dot that follows
+       the mouse exactly, and a larger ring that lags
+       behind for a premium feel.
+       ================================================= */
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+
+    /* Track raw mouse position for the dot */
+    document.addEventListener('mousemove', e => {
+      mx=e.clientX; my=e.clientY;
+      dot.style.left=mx+'px'; dot.style.top=my+'px';
+    });
+
+    /* Smoothly lerp the ring toward the dot (laggy follow effect) */
+    (function tick(){
+      rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+      requestAnimationFrame(tick);
+    })();
+
+    /* Expand the ring when hovering interactive elements */
+    document.querySelectorAll('a,button,.pillar-card').forEach(el=>{
+      el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));
+      el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));
+    });
+
+    /* =================================================
+       NAV SCROLL EFFECT
+       Adds a .scrolled class to the navbar after the
+       user scrolls past 50px, which darkens the
+       background and adds a gold border.
+       ================================================= */
+    const navbar=document.getElementById('navbar');
+    window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>50));
+
+    /* =================================================
+       HAMBURGER MENU (Mobile)
+       Toggles the mobile nav and animates the
+       hamburger icon into an X.
+       ================================================= */
+    function toggleMenu(){
+      document.getElementById('nav-links').classList.toggle('active');
+      document.getElementById('hamburger').classList.toggle('active');
     }
 
-    // Back to Top Button
-    const backToTopButton = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('show');
-      } else {
-        backToTopButton.classList.remove('show');
-      }
-    });
+    /* =================================================
+       BACK TO TOP BUTTON
+       Appears after scrolling 300px; smooth-scrolls
+       back to the top when clicked.
+       ================================================= */
+    const btt=document.getElementById('backToTop');
+    window.addEventListener('scroll',()=>btt.classList.toggle('show',scrollY>300));
+    btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-    backToTopButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    /* =================================================
+       SCROLL REVEAL ANIMATION
+       Uses IntersectionObserver to add a .visible
+       class when elements enter the viewport, which
+       triggers their CSS fade-in/slide-up transitions.
+       Threshold 0.08 = element must be 8% visible.
+       ================================================= */
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
       });
-    });
+    },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
 
-    // Scroll Animation Observer
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Stop observing once visible for better performance
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Observe all elements that should fade in
-    document.addEventListener('DOMContentLoaded', () => {
-      // Observe project cards
-      const projectCards = document.querySelectorAll('.project-card');
-      projectCards.forEach(card => {
-        observer.observe(card);
-      });
-
-      // Observe person cards with staggered delay
-      const personCards = document.querySelectorAll('.person-card');
-      personCards.forEach((card, index) => {
-        card.style.transitionDelay = `${(index % 6) * 0.1}s`;
-        observer.observe(card);
-      });
-
-      // Observe fade-in elements
-      const fadeInElements = document.querySelectorAll('.fade-in');
-      fadeInElements.forEach((el, index) => {
-        el.style.transitionDelay = `${index * 0.1}s`;
-        observer.observe(el);
+    /* Attach observer after DOM is fully loaded */
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.querySelectorAll(
+        '.project-card,.person-card,.pillar-card,.fade-in,.reveal,.reveal-left,.reveal-right'
+      ).forEach((el,i)=>{
+        /* Stagger delay: each element waits a little longer than the previous */
+        el.style.transitionDelay=`${(i%7)*.07}s`;
+        obs.observe(el);
       });
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
